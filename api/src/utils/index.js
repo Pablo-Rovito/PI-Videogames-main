@@ -1,6 +1,7 @@
 require('dotenv').config();
 const { API_KEY } = process.env;
 const axios = require('axios');
+const { Op } = require('sequelize');
 var { Videogame, Genre } = require('../db.js');
 
 module.exports = {
@@ -25,16 +26,21 @@ module.exports = {
 			return e;
 		}
 	},
+	getGamesFromDb: async function () {
+		return await Videogame.findAll({
+			include: { model: Genre, attributes: ['name', 'image_background'] },
+		});
+	},
 	getGamesFromApi: async function () {
 		try {
 			let games = [];
-			let i = 1;
+			let address = '';
 			while (games.length < 100) {
-				let { data } = await axios.get(
-					`https://api.rawg.io/api/games?key=${API_KEY}&page${i}`
-				);
+				!games.length &&
+					(address = `https://api.rawg.io/api/games?key=${API_KEY}`);
+				let { data } = await axios.get(address);
 				games = [...games, ...data.results];
-				i++;
+				address = data.next;
 			}
 			result = games.map(
 				({
@@ -56,9 +62,10 @@ module.exports = {
 						platforms: platforms.map(({ platform }) => {
 							return platform.name;
 						}),
-						genres: 'este viene de la db',
+						genres: genres.map(({ name, image_background }) => {
+							return { name, image_background };
+						}),
 						short_screenshots,
-						created: false,
 					};
 				}
 			);
@@ -80,6 +87,19 @@ module.exports = {
 			return data.results.length < 15
 				? data.results
 				: data.results.splice(0, 15);
+		} catch (e) {
+			return e;
+		}
+	},
+	gamesFromDbQuery: async function (name) {
+		try {
+			return await Videogame.findAll({
+				where: { name: { [Op.iLike]: `%${name}%` } },
+				include: {
+					model: Genre,
+					attributes: ['name', 'image_background'],
+				},
+			});
 		} catch (e) {
 			return e;
 		}
@@ -121,7 +141,6 @@ module.exports = {
 			rating,
 			description,
 			released,
-			genres,
 			platforms,
 		});
 		let genre = await Genre.findAll({
