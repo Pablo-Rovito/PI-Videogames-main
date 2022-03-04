@@ -1,14 +1,13 @@
 import React from 'react';
 
-export default function Landing() {
-	const navigateToHome = function () {
-        history.push("/home")
-		return alert('click gato');
-	};
+export default function Landing(params) {
+	function navigateOnClick() {
+		params.history.push('/home');
+	}
 	return (
 		<div>
-			Esta es la landing Page!
-			<button onClick={navigateToHome}>Entrar</button>
+			<h1>Henry Videogames</h1>
+			<button onClick={navigateOnClick}>Entrar</button>
 		</div>
 	);
 }

@@ -28,7 +28,10 @@ module.exports = {
 	},
 	getGamesFromDb: async function () {
 		return await Videogame.findAll({
-			include: { model: Genre, attributes: ['name', 'image_background'] },
+			include: {
+				model: Genre,
+				attributes: ['id', 'name', 'image_background'],
+			},
 		});
 	},
 	getGamesFromApi: async function () {
@@ -44,6 +47,7 @@ module.exports = {
 			}
 			result = games.map(
 				({
+					id,
 					name,
 					description,
 					rating,
@@ -54,6 +58,7 @@ module.exports = {
 					short_screenshots,
 				}) => {
 					return {
+						id,
 						name,
 						rating,
 						description,
@@ -75,9 +80,11 @@ module.exports = {
 		}
 	},
 	displayRequiredDataFromAllGames: function (games) {
-		return games.map(({ name, description, background_image, genres }) => {
-			return { name, description, background_image, genres };
-		});
+		return games.map(
+			({ id, name, description, background_image, genres }) => {
+				return { id, name, description, background_image, genres };
+			}
+		);
 	},
 	gamesFromApiQuery: async function (name) {
 		try {
