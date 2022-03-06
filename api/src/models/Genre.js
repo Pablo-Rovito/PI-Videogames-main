@@ -8,8 +8,5 @@ module.exports = (sequelize) => {
 			type: DataTypes.STRING,
 			allowNull: false,
 		},
-		image_background: {
-			type: DataTypes.STRING,
-		},
 	});
 };

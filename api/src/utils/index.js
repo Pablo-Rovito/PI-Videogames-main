@@ -10,15 +10,14 @@ module.exports = {
 			let { data } = await axios.get(
 				`https://api.rawg.io/api/genres?key=${API_KEY}`
 			);
-			const genres = data.results.map(({ name, image_background }) => {
+			const genres = data.results.map(({ name }) => {
 				return {
 					name,
-					image_background,
 				};
 			});
-			genres.forEach(({ name, image_background }) => {
+			genres.forEach(({ name }) => {
 				Genre.findOrCreate({
-					where: { name: name, image_background: image_background },
+					where: { name: name },
 				});
 			});
 			return genres;
@@ -30,7 +29,7 @@ module.exports = {
 		return await Videogame.findAll({
 			include: {
 				model: Genre,
-				attributes: ['id', 'name', 'image_background'],
+				attributes: ['id', 'name'],
 			},
 		});
 	},
@@ -67,8 +66,8 @@ module.exports = {
 						platforms: platforms.map(({ platform }) => {
 							return platform.name;
 						}),
-						genres: genres.map(({ name, image_background }) => {
-							return { name, image_background };
+						genres: genres.map(({ name }) => {
+							return { name };
 						}),
 						short_screenshots,
 					};
@@ -81,8 +80,15 @@ module.exports = {
 	},
 	displayRequiredDataFromAllGames: function (games) {
 		return games.map(
-			({ id, name, description, background_image, genres }) => {
-				return { id, name, description, background_image, genres };
+			({ id, name, description, background_image, genres, created }) => {
+				return {
+					id,
+					name,
+					description,
+					background_image,
+					genres,
+					created,
+				};
 			}
 		);
 	},
@@ -104,7 +110,7 @@ module.exports = {
 				where: { name: { [Op.iLike]: `%${name}%` } },
 				include: {
 					model: Genre,
-					attributes: ['name', 'image_background'],
+					attributes: ['name'],
 				},
 			});
 		} catch (e) {

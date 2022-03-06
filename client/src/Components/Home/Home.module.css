@@ -1,0 +1,13 @@
+.global {
+	background-color: rgb(20, 29, 48);
+	color: azure;
+}
+
+.filters {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+.filter:focus {
+	outline: none;
+}
