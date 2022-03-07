@@ -1,0 +1,7 @@
+.global {
+	background-color: rgb(20, 29, 48);
+	color: azure;
+	display: grid;
+	grid-template-rows: auto;
+	justify-content: center;
+}

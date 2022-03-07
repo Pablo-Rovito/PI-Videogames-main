@@ -15,7 +15,7 @@ router.get('/', async function (req, res) {
 		if (name) {
 			let resultsFromApi = await gamesFromApiQuery(name);
 			let resultsFromDb = await gamesFromDbQuery(name);
-			let results = [...resultsFromApi , ...resultsFromDb];
+			let results = [...resultsFromApi, ...resultsFromDb];
 			results.length === 0
 				? res.status(404).json({ msg: 'no se encontraron resultados' })
 				: res.json(displayRequiredDataFromAllGames(results));
@@ -26,7 +26,7 @@ router.get('/', async function (req, res) {
 			displayRequiredDataFromAllGames([...gamesFromApi, ...gamesFromDb])
 		);
 	} catch (e) {
-		res.send(e);
+		res.json(e);
 	}
 });
 

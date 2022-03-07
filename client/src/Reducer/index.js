@@ -18,7 +18,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				return { ...state };
 			}
 			state.videogames.forEach((game) => {
-				game.genres.map((genre) => {
+				game.genres.forEach((genre) => {
 					if (Object.values(genre).includes(payload))
 						filteredByGenre.push(game);
 				});
@@ -50,6 +50,12 @@ const rootReducer = (state = initialState, { type, payload }) => {
 					return a.name > b.name ? -1 : a.name < b.name ? 1 : 0;
 				}),
 			};
+		case 'SEARCH_BY_NAME':
+			return { ...state, videogames: payload };
+		case 'SEARCH_BY_ID':
+			return { ...state, videogames: [payload] };
+		case 'ADD_GAME':
+			return { ...state, videogames: [payload] };
 		default:
 			return { ...state };
 	}

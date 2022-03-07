@@ -13,27 +13,52 @@ module.exports = (sequelize) => {
 		name: {
 			type: DataTypes.STRING,
 			allowNull: false,
+			defaultValue: 'missing name',
 		},
 		description: {
 			type: DataTypes.TEXT,
 			allowNull: false,
-		},
-		image_background: { type: DataTypes.STRING },
-		released: {
-			type: DataTypes.DATEONLY,
+			defaultValue: 'missing description',
 		},
 		rating: {
 			type: DataTypes.REAL,
+			allowNull: false,
+			defaultValue: 0,
+		},
+		background_image: {
+			type: DataTypes.STRING,
+			allowNull: false,
+			defaultValue: 'missing image',
+		},
+		released: {
+			type: DataTypes.DATEONLY,
+			allowNull: false,
+			defaultValue: 1969/12/31,
 		},
 		platforms: {
 			type: DataTypes.STRING,
+			allowNull: false,
+			defaultValue: ['no platforms found'],
 			get: function () {
-				return JSON.parse(this.getDataValue('platforms')); //jsoneo el string guardado para devolver un array
+				return JSON.parse(this.getDataValue('platforms'));
 			},
 			set: function (arr) {
-				return this.setDataValue('platforms', JSON.stringify(arr)); //estringueo el array que entra para guardarlo como str
+				return this.setDataValue('platforms', JSON.stringify(arr));
 			},
+		},
+		short_screenshots: {
+			type: DataTypes.STRING,
 			allowNull: false,
+			defaultValue: ['no images found'],
+			get: function () {
+				return JSON.parse(this.getDataValue('short_screenshots'));
+			},
+			set: function (arr) {
+				return this.setDataValue(
+					'short_screenshots',
+					JSON.stringify(arr)
+				);
+			},
 		},
 		created: {
 			type: DataTypes.BOOLEAN,

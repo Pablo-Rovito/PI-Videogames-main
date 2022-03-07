@@ -80,13 +80,28 @@ module.exports = {
 	},
 	displayRequiredDataFromAllGames: function (games) {
 		return games.map(
-			({ id, name, description, background_image, genres, created }) => {
+			({
+				id,
+				name,
+				description,
+				rating,
+				background_image,
+				released,
+				genres,
+				platforms,
+				short_screenshots,
+				created,
+			}) => {
 				return {
 					id,
 					name,
 					description,
+					rating,
 					background_image,
+					released,
 					genres,
+					platforms,
+					short_screenshots,
 					created,
 				};
 			}
@@ -124,14 +139,15 @@ module.exports = {
 			);
 			let detail = {
 				name: data.name,
-				background_image: data.background_image,
-				rating: data.rating,
 				description: data.description,
+				rating: data.rating,
+				background_image: data.background_image,
 				released: data.released,
-				genres: 'los q correspondan',
+				genres: data.genres,
 				platforms: data.platforms.map(({ platform }) => {
 					return platform.name;
 				}),
+				short_screenshots: data.short_screenshots,
 			};
 			return detail;
 		} catch (e) {
@@ -141,20 +157,22 @@ module.exports = {
 	postGameToDb: async function (data) {
 		let {
 			name,
-			image_background,
-			rating,
 			description,
+			rating,
+			background_image,
 			released,
 			genres,
 			platforms,
+			short_screenshots,
 		} = data;
 		let newGame = await Videogame.create({
 			name,
-			image_background,
-			rating,
 			description,
+			rating,
+			background_image,
 			released,
 			platforms,
+			short_screenshots,
 		});
 		let genre = await Genre.findAll({
 			where: { name: genres },

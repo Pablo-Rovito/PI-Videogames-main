@@ -11,6 +11,7 @@ import {
 	ByCreation,
 	ResultsPerPage,
 } from '../Filters/Filters';
+import SearchBar from '../SearchBar/SearchBar';
 
 export default function Home() {
 	const dispatch = useDispatch();
@@ -26,7 +27,7 @@ export default function Home() {
 	}, [dispatch]);
 
 	useEffect(() => {
-		setLoading(!loading);
+		setLoading((loading) => !loading);
 		setCurrentPage(1);
 	}, [allVideogames]);
 
@@ -47,6 +48,7 @@ export default function Home() {
 		<div className={styles.global}>
 			<div className={styles.head}>
 				<h2>HOME</h2>
+				<SearchBar />
 			</div>
 			<div className={styles.filters}>
 				<ResultsPerPage

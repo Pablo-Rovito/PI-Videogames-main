@@ -6,7 +6,7 @@ export default function Card({ name, background_image }) {
 			<h5>{name}</h5>
 			<img
 				src={background_image}
-				alt='no image'
+				alt=''
 				width={'240px'}
 				height={'auto'}
 			/>

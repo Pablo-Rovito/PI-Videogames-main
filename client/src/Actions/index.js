@@ -25,3 +25,31 @@ export function setOrder(payload) {
 export function filterByCreator(payload) {
 	return { type: 'FILTER_BY_CREATOR', payload };
 }
+
+export function searchByName(payload) {
+	return async function (dispatch) {
+		var results = await axios.get(
+			`http://localhost:3001/videogames/?name=${payload.toLowerCase()}`
+		);
+		return dispatch({ type: 'SEARCH_BY_NAME', payload: results.data });
+	};
+}
+
+export function searchById(payload) {
+	return async function (dispatch) {
+		var results = await axios.get(
+			`http://localhost:3001/videogame/${payload}`
+		);
+		return dispatch({ type: 'SEARCH_BY_ID', payload: results.data });
+	};
+}
+
+export function postToDb(payload) {
+	return async function (dispatch) {
+		var results = await axios.post(
+			`http://localhost:3001/videogame/`,
+			payload
+		);
+		return dispatch({ type: 'ADD_GAME', payload: results.data });
+	};
+}
