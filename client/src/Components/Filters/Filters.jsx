@@ -4,7 +4,7 @@ import {
 	filterByGenres,
 	filterByCreator,
 	getGenres,
-	setOrder,
+	setOrderName,setOrderRating
 } from '../../Actions';
 import styles from '../Home/Home.module.css';
 import moreStyles from './Filters.module.css';
@@ -19,6 +19,7 @@ export function ByGenre() {
 	const allGenres = useSelector((state) => state.genres);
 
 	const [genre, setGenre] = useState('Select filter');
+	
 
 	function handleChange(e) {
 		e.preventDefault();
@@ -56,7 +57,7 @@ export function ByOrder() {
 
 	function handleChange(e) {
 		e.preventDefault();
-		dispatch(setOrder(e.target.value));
+		dispatch(setOrderName(e.target.value));
 		setSort(e.target.value);
 	}
 	return (
@@ -73,6 +74,32 @@ export function ByOrder() {
 		</div>
 	);
 }
+
+export function ByRating() {
+	const dispatch = useDispatch();
+
+	const [sort, setSort] = useState('Sort');
+
+	function handleChange(e) {
+		e.preventDefault();
+		dispatch(setOrderRating(e.target.value));
+		setSort(e.target.value);
+	}
+	return (
+		<div className={moreStyles.select}>
+			<span>{sort}</span>
+			<select
+				value={'sort'}
+				className={styles.filter}
+				onChange={(e) => handleChange(e)}>
+				<option value='sort'>Sort...</option>
+				<option value={'0-10'}>0-10</option>
+				<option value={'10-0'}>10-0</option>
+			</select>
+		</div>
+	);
+}
+
 
 export function ByCreation() {
 	const dispatch = useDispatch();

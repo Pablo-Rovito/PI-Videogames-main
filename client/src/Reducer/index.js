@@ -40,7 +40,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				(game) => game.created !== true
 			);
 			return { ...state, videogames: filteredByCreator };
-		case 'SET_ORDER':
+		case 'SET_ORDER_NAME':
 			return {
 				...state,
 				videogames: [...state.videogames].sort(function (a, b) {
@@ -48,6 +48,24 @@ const rootReducer = (state = initialState, { type, payload }) => {
 						return a.name > b.name ? 1 : a.name < b.name ? -1 : 0;
 					}
 					return a.name > b.name ? -1 : a.name < b.name ? 1 : 0;
+				}),
+			};
+		case 'SET_ORDER_RATING':
+			return {
+				...state,
+				videogames: [...state.videogames].sort(function (a, b) {
+					if (payload === '0-10') {
+						return a.rating > b.rating
+							? 1
+							: a.rating < b.rating
+							? -1
+							: 0;
+					}
+					return a.rating > b.rating
+						? -1
+						: a.rating < b.rating
+						? 1
+						: 0;
 				}),
 			};
 		case 'SEARCH_BY_NAME':

@@ -1,0 +1,9 @@
+.card {
+	display: grid;
+	grid-template-rows: 1fr 3fr 1fr;
+	justify-content: center;
+	align-items: center;
+	justify-items: center;
+	align-content: space-evenly;
+	overflow: hidden;
+}

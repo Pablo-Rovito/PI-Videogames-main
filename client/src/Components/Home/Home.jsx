@@ -10,6 +10,7 @@ import {
 	ByOrder,
 	ByCreation,
 	ResultsPerPage,
+	ByRating,
 } from '../Filters/Filters';
 import SearchBar from '../SearchBar/SearchBar';
 
@@ -21,6 +22,7 @@ export default function Home() {
 	const [results, setResults] = useState(15);
 	const [loading, setLoading] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
+	const [orderSelector, setOrderSelector] = useState('Sort by name');
 
 	useEffect(() => {
 		dispatch(getGames());
@@ -38,6 +40,13 @@ export default function Home() {
 
 	function handlePaginate(n) {
 		setCurrentPage(n);
+	}
+
+	function handleOrderSelector(e) {
+		e.preventDefault();
+		setOrderSelector(
+			orderSelector === 'Sort by name' ? 'Sort by rating' : 'Sort by name'
+		);
 	}
 
 	const indexOfLastPost = currentPage * results;
@@ -58,7 +67,13 @@ export default function Home() {
 				/>
 				<ByCreation />
 				<ByGenre />
-				<ByOrder />
+				<span>
+					<button onClick={handleOrderSelector}>
+						{orderSelector}
+					</button>
+				</span>
+				{orderSelector === 'Sort by name' && <ByOrder />}
+				{orderSelector === 'Sort by rating' && <ByRating />}
 			</div>
 
 			<div>

@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { postToDb } from '../../Actions';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { postToDb, getGenres } from '../../Actions';
 import styles from './Create.module.css';
 
 export default function Create() {
 	const dispatch = useDispatch();
+
+	const allGenres = useSelector((state) => state.genres);
+	if (allGenres.length === 0) {
+		dispatch(getGenres());
+	}
 
 	const [newGame, setNewGame] = useState({
 		name: '',
@@ -14,8 +20,21 @@ export default function Create() {
 		released: '',
 	});
 
+	const [e, setE] = useState({
+		name: `Cannot save an empty name`,
+		description: `Cannot save an empty description`,
+		rating: `Cannot save an empty rating`,
+		background_image: '',
+		released: `Cannot save an empty date`,
+	});
+
+	const [disableSend, setDisableSend] = useState(true);
+	
+	useEffect(() => {
+		console.log('e');
+	}, [e]);
+
 	const [platform, setPlatform] = useState([]);
-	const [genre, setGenre] = useState([]);
 	const [screenshot, setScreenshot] = useState([]);
 
 	const [platforms, setPlatforms] = useState([]);
@@ -41,15 +60,9 @@ export default function Create() {
 		setPlatform('');
 	}
 
-	function handleGenreChange(e) {
-		e.preventDefault();
-		setGenre(e.target.value);
-	}
-
 	function handleAddGenre(e) {
 		e.preventDefault();
-		setGenres([...genres, genre]);
-		setGenre('');
+		setGenres([...genres, e.target.value]);
 	}
 
 	function handleScreenshotChange(e) {
@@ -94,6 +107,8 @@ export default function Create() {
 						name={'name'}
 						value={newGame.name}
 						onChange={(e) => handleOnChange(e)}></input>
+					{e.name && `Cannot save an empty name`}
+					{}
 				</div>
 				<div>
 					<label>Description</label>
@@ -101,6 +116,7 @@ export default function Create() {
 						name={'description'}
 						value={newGame.description}
 						onChange={(e) => handleOnChange(e)}></input>
+					{!newGame.description && `Cannot save an empty description`}
 				</div>
 				<div>
 					<label>Rating</label>
@@ -108,11 +124,12 @@ export default function Create() {
 						name={'rating'}
 						value={newGame.rating}
 						onChange={(e) => handleOnChange(e)}></input>
+					{!newGame.rating && `Cannot save an empty rating`}
 				</div>
 				<div>
 					<label>Image</label>
 					<input
-						name={'image_background'}
+						name={'background_image'}
 						value={newGame.background_image}
 						onChange={(e) => handleOnChange(e)}></input>
 				</div>
@@ -123,21 +140,35 @@ export default function Create() {
 						name={'released'}
 						value={newGame.released}
 						onChange={(e) => handleOnChange(e)}></input>
+					{!newGame.released && `Cannot save an empty date`}
 				</div>
-				<button type='submit'>Submit</button>
+				<button type='submit' disabled={disableSend}>
+					Submit
+				</button>
 			</form>
 			<div>
 				<form>
 					<label>Add genre</label>
-					<input
-						name={'genre'}
-						value={genre}
-						onChange={(e) => handleGenreChange(e)}></input>
-					<button onClick={(e) => handleAddGenre(e)}>+</button>
-					{genres.map((g) => {
-						return ` ${g} `;
-					})}
+					<select
+						value={'Add genre'}
+						className={styles.filter}
+						onChange={(e) => handleAddGenre(e)}>
+						<option hidden disabled value='Add genre'>
+							Add genre
+						</option>
+						{allGenres.map(({ name }) => {
+							return (
+								<option key={name} value={name}>
+									{name}
+								</option>
+							);
+						})}
+					</select>
 				</form>
+				{genres.length === 0 && `Cannot save empty genres`}
+				{genres.map((g) => {
+					return ` ${g} `;
+				})}
 			</div>
 			<div>
 				<form>
@@ -147,10 +178,12 @@ export default function Create() {
 						value={platform}
 						onChange={(e) => handlePlatformChange(e)}></input>
 					<button onClick={(e) => handleAddPlatform(e)}>+</button>
-					{platforms.map((g) => {
-						return ` ${g} `;
-					})}
 				</form>
+
+				{platforms.length === 0 && `Cannot save empty platforms`}
+				{platforms.map((p) => {
+					return ` ${p} `;
+				})}
 			</div>
 			<div>
 				<form>
@@ -160,10 +193,12 @@ export default function Create() {
 						value={screenshot}
 						onChange={(e) => handleScreenshotChange(e)}></input>
 					<button onClick={(e) => handleAddScreenshot(e)}>+</button>
-					{short_screenshots.map((g) => {
-						return ` ${g} `;
-					})}
 				</form>
+				{short_screenshots.length === 0 &&
+					`Cannot save empty screenshots`}
+				{short_screenshots.map((s) => {
+					return ` ${s} `;
+				})}
 			</div>
 		</div>
 	);

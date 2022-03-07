@@ -29,7 +29,7 @@ module.exports = {
 		return await Videogame.findAll({
 			include: {
 				model: Genre,
-				attributes: ['id', 'name'],
+				attributes: ['name'],
 			},
 		});
 	},
@@ -155,28 +155,34 @@ module.exports = {
 		}
 	},
 	postGameToDb: async function (data) {
-		let {
-			name,
-			description,
-			rating,
-			background_image,
-			released,
-			genres,
-			platforms,
-			short_screenshots,
-		} = data;
-		let newGame = await Videogame.create({
-			name,
-			description,
-			rating,
-			background_image,
-			released,
-			platforms,
-			short_screenshots,
-		});
-		let genre = await Genre.findAll({
-			where: { name: genres },
-		});
-		newGame.addGenre(genre);
+		try {
+			let {
+				name,
+				description,
+				rating,
+				background_image,
+				released,
+				genres,
+				platforms,
+				short_screenshots,
+			} = data;
+			let newGame = await Videogame.findOrCreate({
+				where: {
+					name,
+					description,
+					rating,
+					background_image,
+					released,
+					platforms,
+					short_screenshots,
+				},
+			});
+			let genre = await Genre.findAll({
+				where: { name: genres },
+			});
+			newGame.addGenre(genre);
+		} catch (e) {
+			return e;
+		}
 	},
 };

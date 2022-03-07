@@ -8,10 +8,14 @@ export default function Page({ gamesInPage, loading }) {
 	if (loading && !gamesLoading.length) return <h2>Loading...</h2>;
 	return (
 		<div className={styles.cardsContainer}>
-			{gamesInPage.map(({ id, name, background_image }) => {
+			{gamesInPage.map(({ id, name, background_image, genres }) => {
 				return (
 					<div key={id} className={styles.card}>
-						<Card name={name} background_image={background_image} />
+						<Card
+							name={name}
+							background_image={background_image}
+							genres={genres}
+						/>
 					</div>
 				);
 			})}

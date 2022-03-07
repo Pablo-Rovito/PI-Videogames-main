@@ -18,8 +18,12 @@ export function filterByGenres(payload) {
 	return { type: 'FILTER_BY_GENRES', payload };
 }
 
-export function setOrder(payload) {
-	return { type: 'SET_ORDER', payload };
+export function setOrderName(payload) {
+	return { type: 'SET_ORDER_NAME', payload };
+}
+
+export function setOrderRating(payload) {
+	return { type: 'SET_ORDER_RATING', payload };
 }
 
 export function filterByCreator(payload) {
