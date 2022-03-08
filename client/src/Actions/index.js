@@ -57,3 +57,11 @@ export function postToDb(payload) {
 		return dispatch({ type: 'ADD_GAME', payload: results.data });
 	};
 }
+
+export function logIn() {
+	return { type: 'LOG_IN' };
+}
+
+export function logOut() {
+	return { type: 'LOG_OUT' };
+}

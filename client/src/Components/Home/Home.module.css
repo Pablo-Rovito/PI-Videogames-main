@@ -1,6 +1,12 @@
 .global {
-	background-color: rgb(20, 29, 48);
+	background-color: rgba(20, 29, 48, 0.692);
 	color: azure;
+	width: 70vw;
+	backdrop-filter: blur(2px);
+	border: solid 5px rgba(20, 29, 48, 0.151);
+	border-radius: 5px;
+	width: 64vw;
+	margin: 0 17.6vw;
 }
 
 .filters {

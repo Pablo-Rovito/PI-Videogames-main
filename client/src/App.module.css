@@ -1,0 +1,20 @@
+.app {
+	text-align: center;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: absolute;
+	background: linear-gradient(to bottom right, #0a4c66, #02101d);
+	color: azure;
+}
+
+.background {
+	width: 100vw;
+	height: 100vh;
+	background-image: url('./Assets/background.jpg');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: top;
+	overflow: hidden;
+}

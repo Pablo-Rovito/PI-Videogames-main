@@ -2,6 +2,7 @@ const initialState = {
 	videogames: [],
 	genres: [],
 	allVideogames: [],
+	loggedIn: false,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -74,6 +75,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
 			return { ...state, videogames: [payload] };
 		case 'ADD_GAME':
 			return { ...state, videogames: [payload] };
+		case 'LOG_IN':
+			return { ...state, loggedIn: true };
+		case 'LOG_OUT':
+			return { ...state, loggedIn: false };
 		default:
 			return { ...state };
 	}

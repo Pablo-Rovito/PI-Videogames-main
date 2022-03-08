@@ -56,7 +56,6 @@ export default function Home() {
 	return (
 		<div className={styles.global}>
 			<div className={styles.head}>
-				<h2>HOME</h2>
 				<SearchBar />
 			</div>
 			<div className={styles.filters}>
