@@ -2,31 +2,38 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { searchByName, searchById } from '../../Actions';
 import styles from './SearchBar.module.css';
+import asset from '../../Assets/forms.module.css';
 
 export default function SearchBar() {
-	const [byName, setByName] = useState(false);
+	const [byName, setByName] = useState(true);
 
 	const dispatch = useDispatch();
 
+	function handleStateChange(e) {
+		e.preventDefault(e);
+		setByName(!byName);
+	}
+
 	function handleOnSearch(e) {
 		e.preventDefault();
+		if (window.location.href !== 'http://localhost:3000/home') {
+			alert('Must search from home!');
+			window.location.assign('/home');
+		}
 		byName && dispatch(searchByName(e.target[0].value));
 		!byName && dispatch(searchById(e.target[0].value));
 	}
 	return (
-		<form className={styles.searchBar} onSubmit={handleOnSearch}>
-			<input
-				className={styles.input}
-				placeholder='Search by name or ID'
-			/>
-			<button className={styles.button} type='submit'>
-				{byName ? 'Search by name' : 'Search by ID'}
+		<form className={styles.searchBar} onSubmit={(e) => handleOnSearch(e)}>
+			<input className={asset.input} placeholder='Search input...' />
+			<button className={asset.button} type='submit'>
+				Search by...
 			</button>
-			<input
-				className={styles.checkBox}
-				type='checkbox'
-				onChange={() => setByName(!byName)}
-			/>
+			<button
+				className={asset.button_select}
+				onClick={(e) => handleStateChange(e)}>
+				{byName ? 'Name' : 'ID'}
+			</button>
 		</form>
 	);
 }

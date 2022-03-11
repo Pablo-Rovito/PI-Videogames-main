@@ -3,35 +3,29 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getGames } from '../../Actions';
 import styles from './Home.module.css';
+import asset from '../../Assets/forms.module.css';
 import Page from '../Page/Page';
 import Pagination from '../Pagination/Pagination';
-import {
-	ByGenre,
-	ByOrder,
-	ByCreation,
-	ResultsPerPage,
-	ByRating,
-} from '../Filters/Filters';
-import SearchBar from '../SearchBar/SearchBar';
+import { ResultsPerPage } from '../Filters/Filters';
 
 export default function Home() {
 	const dispatch = useDispatch();
 
 	const allVideogames = useSelector((state) => state.videogames);
+	const refreshState = useSelector((state) => state.refresh);
 
 	const [results, setResults] = useState(15);
 	const [loading, setLoading] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [orderSelector, setOrderSelector] = useState('Sort by name');
 
 	useEffect(() => {
-		dispatch(getGames());
+		refreshState && dispatch(getGames());
 	}, [dispatch]);
 
 	useEffect(() => {
 		setLoading((loading) => !loading);
 		setCurrentPage(1);
-	}, [allVideogames]);
+	}, [allVideogames, results]);
 
 	function handleResults(e) {
 		e.preventDefault();
@@ -42,49 +36,32 @@ export default function Home() {
 		setCurrentPage(n);
 	}
 
-	function handleOrderSelector(e) {
-		e.preventDefault();
-		setOrderSelector(
-			orderSelector === 'Sort by name' ? 'Sort by rating' : 'Sort by name'
-		);
-	}
-
 	const indexOfLastPost = currentPage * results;
 	const indexOfFirstPost = indexOfLastPost - results;
-	const currentPosts = allVideogames.slice(indexOfFirstPost, indexOfLastPost);
+	const currentPosts = allVideogames?.slice(
+		indexOfFirstPost,
+		indexOfLastPost
+	);
 
 	return (
-		<div className={styles.global}>
-			<div className={styles.head}>
-				<SearchBar />
+		<div className={asset.global}>
+			<div style={{ display: 'flex', justifyContent: 'center' }}>
+				<Page gamesInPage={currentPosts} loading={loading} />
 			</div>
-			<div className={styles.filters}>
+			<span className={styles.filters}>
 				<ResultsPerPage
 					allVideogames={allVideogames}
 					results={results}
 					handleResults={handleResults}
 				/>
-				<ByCreation />
-				<ByGenre />
-				<span>
-					<button onClick={handleOrderSelector}>
-						{orderSelector}
-					</button>
-				</span>
-				{orderSelector === 'Sort by name' && <ByOrder />}
-				{orderSelector === 'Sort by rating' && <ByRating />}
-			</div>
-
-			<div>
-				<Page gamesInPage={currentPosts} loading={loading} />
-			</div>
-			<span>
+			</span>
+			<div className={styles.pagination}>
 				<Pagination
 					results={results}
 					totalPosts={allVideogames.length}
 					handlePaginate={handlePaginate}
 				/>
-			</span>
+			</div>
 		</div>
 	);
 }

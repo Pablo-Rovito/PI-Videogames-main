@@ -1,9 +1,50 @@
 .card {
+	margin: 2em 0;
+	width: 17vw;
+	height: 48vh;
 	display: grid;
-	grid-template-rows: 1fr 3fr 1fr;
+	grid-template-rows: 1fr 20fr 4fr;
 	justify-content: center;
 	align-items: center;
 	justify-items: center;
-	align-content: space-evenly;
 	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.6);
+	border-radius: 0.2em;
+	box-shadow: 0 0 0 0 #ecb46515;
+	animation-name: glow;
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+}
+
+.title {
+	grid-row: 1;
+}
+
+.image {
+	grid-row: 2;
+	overflow: hidden;
+	max-height: 100%;
+}
+
+.genres {
+	grid-row: 3;
+	font-weight: 200;
+	color: #ecb365;
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 1em;
+}
+
+@keyframes glow {
+	from {
+		box-shadow: 0 0 0 0 #ffffff7e;
+	}
+
+	50% {
+		box-shadow: 0 0 1em 0.02em #ffffff7e;
+	}
+
+	to {
+		box-shadow: 0 0 0 0 #ffffff7e;
+	}
 }

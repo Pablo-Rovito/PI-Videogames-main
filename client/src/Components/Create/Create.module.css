@@ -1,7 +1,16 @@
-.global {
-	background-color: rgb(20, 29, 48);
-	color: azure;
+.form_container {
+	margin: 2em 0 0 2em;
 	display: grid;
 	grid-template-rows: auto;
-	justify-content: center;
+	grid-gap: 1em;
+	justify-items: start;
 }
+
+.validInput {
+	color: #ecb365;
+}
+
+
+
+
+

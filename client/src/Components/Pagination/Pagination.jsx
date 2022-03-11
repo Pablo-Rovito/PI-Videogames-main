@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Pagination.module.css';
+import asset from '../../Assets/forms.module.css';
 
 export default function Pagination({ results, totalPosts, handlePaginate }) {
 	const pageNumbers = [];
@@ -13,7 +13,7 @@ export default function Pagination({ results, totalPosts, handlePaginate }) {
 				return (
 					<span key={number}>
 						<button
-							className={styles.button}
+							className={asset.button_select}
 							onClick={() => handlePaginate(number)}>
 							{number}
 						</button>

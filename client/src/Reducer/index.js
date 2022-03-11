@@ -1,8 +1,10 @@
 const initialState = {
 	videogames: [],
+	videogame: {},
 	genres: [],
 	allVideogames: [],
 	loggedIn: false,
+	refresh: true,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -35,7 +37,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				filteredByCreator = state.allVideogames.filter(
 					(game) => game.created === true
 				);
-				return { ...state, videogames: filteredByCreator };
+				return filteredByCreator.length === 0
+					? { ...state, videogames: [{ status: 404 }] }
+					: { ...state, videogames: filteredByCreator };
 			}
 			filteredByCreator = state.allVideogames.filter(
 				(game) => game.created !== true
@@ -70,9 +74,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				}),
 			};
 		case 'SEARCH_BY_NAME':
-			return { ...state, videogames: payload };
+			return { ...state, videogames: payload, refresh: false };
 		case 'SEARCH_BY_ID':
-			return { ...state, videogames: [payload] };
+			return { ...state, videogame: payload, refresh: false };
 		case 'ADD_GAME':
 			return { ...state, videogames: [payload] };
 		case 'LOG_IN':

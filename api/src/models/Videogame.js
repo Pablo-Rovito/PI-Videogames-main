@@ -13,6 +13,10 @@ module.exports = (sequelize) => {
 				primaryKey: true,
 				defaultValue: Sequelize.UUIDV1,
 			},
+			apiId: {
+				type: DataTypes.INTEGER,
+				allowNull: true,
+			},
 			name: {
 				type: DataTypes.STRING,
 				allowNull: false,

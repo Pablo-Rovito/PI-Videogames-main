@@ -1,15 +1,12 @@
 .nav {
 	background-color: rgba(0, 0, 0, 0.849);
-	backdrop-filter: blur(1px);
-	height: 13vh;
+	backdrop-filter: blur(6px);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	column-gap: 1em;
 	color: #ecb365;
 }
-
-
 
 a {
 	text-decoration: inherit;

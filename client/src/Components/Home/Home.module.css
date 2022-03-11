@@ -1,19 +1,9 @@
-.global {
-	background-color: rgba(20, 29, 48, 0.692);
-	color: azure;
-	width: 70vw;
-	backdrop-filter: blur(2px);
-	border: solid 5px rgba(20, 29, 48, 0.151);
-	border-radius: 5px;
-	width: 64vw;
-	margin: 0 17.6vw;
-}
-
 .filters {
 	display: flex;
+	margin: 2em 0;
 	justify-content: center;
-	align-content: center;
 }
-.filter:focus {
-	outline: none;
+
+.pagination {
+	margin: 2em 0;
 }

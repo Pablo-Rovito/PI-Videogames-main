@@ -26,7 +26,8 @@ router.get('/', async function (req, res) {
 			displayRequiredDataFromAllGames([...gamesFromApi, ...gamesFromDb])
 		);
 	} catch (e) {
-		res.json(e);
+		console.log(e);
+		res.send('Error');
 	}
 });
 

@@ -30,6 +30,7 @@ module.exports = {
 			include: {
 				model: Genre,
 				attributes: ['name'],
+				through: { attributes: [] },
 			},
 		});
 	},
@@ -57,10 +58,12 @@ module.exports = {
 					short_screenshots,
 				}) => {
 					return {
-						id,
+						apiId: id,
 						name,
 						rating,
-						description,
+						description: description
+							? description
+							: 'No description found',
 						background_image,
 						released,
 						platforms: platforms.map(({ platform }) => {
@@ -82,6 +85,7 @@ module.exports = {
 		return games.map(
 			({
 				id,
+				apiId,
 				name,
 				description,
 				rating,
@@ -94,8 +98,11 @@ module.exports = {
 			}) => {
 				return {
 					id,
+					apiId,
 					name,
-					description,
+					description: description
+						? description
+						: 'No description found',
 					rating,
 					background_image,
 					released,
@@ -138,8 +145,11 @@ module.exports = {
 				`https://api.rawg.io/api/games/${id}?key=${API_KEY}`
 			);
 			let detail = {
+				apiId: data.id,
 				name: data.name,
-				description: data.description,
+				description: data.description
+					? data.description
+					: 'No description found',
 				rating: data.rating,
 				background_image: data.background_image,
 				released: data.released,
@@ -147,7 +157,9 @@ module.exports = {
 				platforms: data.platforms.map(({ platform }) => {
 					return platform.name;
 				}),
-				short_screenshots: data.short_screenshots,
+				short_screenshots: data.short_screenshots
+					? data.short_screenshots
+					: [{ id: 1, image: data.background_image }],
 			};
 			return detail;
 		} catch (e) {

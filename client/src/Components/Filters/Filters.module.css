@@ -2,3 +2,18 @@
 	display: grid;
 	grid-template-columns: auto;
 }
+
+.filters {
+	display: flex;
+	justify-content: center;
+	align-content: center;
+}
+.filter:focus {
+	outline: none;
+}
+
+.resultsSelector {
+	display: flex;
+	align-items: center;
+	color: #ecb365;
+}

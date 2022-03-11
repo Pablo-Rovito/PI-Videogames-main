@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { logIn, logOut } from '../../Actions';
-import asset from '../../Assets/button.module.css';
+import asset from '../../Assets/forms.module.css';
 import styles from './Landing.module.css';
 
 export default function Landing(params) {
@@ -17,9 +17,22 @@ export default function Landing(params) {
 
 	return (
 		<div className={styles.main}>
-			<button className={asset.button} onClick={navigateOnClick}>
-				LOG IN
-			</button>
+			<form onSubmit={navigateOnClick}>
+				<div>
+					<input
+						className={asset.input}
+						placeholder='Username'></input>
+				</div>
+				<div>
+					<input
+						className={asset.input}
+						placeholder='Password'></input>
+				</div>
+				<br />
+				<button type='submit' className={asset.superButton}>
+					LOG IN
+				</button>
+			</form>
 		</div>
 	);
 }
