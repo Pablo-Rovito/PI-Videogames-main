@@ -1,0 +1,26 @@
+.sidePanel {
+	height: 100%;
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr;
+}
+
+.sort {
+	grid-row: 1;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+}
+
+.creation {
+	grid-row: 2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.genre {
+	grid-row: 3;
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+}

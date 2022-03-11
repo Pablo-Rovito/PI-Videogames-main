@@ -4,13 +4,12 @@ import styles from './Card.module.css';
 import asset from '../../Assets/forms.module.css';
 
 export default function Card({ apiId, name, background_image, genres }) {
-	const sanitizedName = decodeURIComponent(name);
-
+	console.log(apiId);
 	return (
 		<div className={styles.card}>
 			<div className={asset.title}>
 				<Link to={`/detail/${apiId}`}>
-					<h4>{sanitizedName}</h4>
+					<h4>{decodeURIComponent(name)}</h4>
 				</Link>
 			</div>
 

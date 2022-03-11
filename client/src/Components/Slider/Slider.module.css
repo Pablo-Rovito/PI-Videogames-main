@@ -27,7 +27,7 @@
 .slide,
 .slide_active {
 	position: absolute;
-	transition: opacity ease-in-out 0.4s;
+	transition: opacity ease-in-out 0.2s;
 }
 
 .slide {

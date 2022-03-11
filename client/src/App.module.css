@@ -51,3 +51,8 @@
 	overflow: scroll;
 	display: flex;
 }
+
+a {
+	text-decoration: inherit;
+	color: inherit;
+}

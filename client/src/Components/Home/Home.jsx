@@ -50,7 +50,7 @@ export default function Home() {
 			</div>
 			<span className={styles.filters}>
 				<ResultsPerPage
-					allVideogames={allVideogames}
+					allVideogames={allVideogames.length}
 					results={results}
 					handleResults={handleResults}
 				/>

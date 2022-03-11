@@ -10,16 +10,22 @@ import { searchById } from '../../Actions';
 export default function Detail({ match }) {
 	const dispatch = useDispatch();
 
-	const game = useSelector((state) => state?.videogame);
-	const allGames = useSelector((state) => state?.videogames);
-	console.log(game);
 	useEffect(() => {
 		dispatch(searchById(match.params.id));
 	}, []);
 
-	const [{ short_screenshots }] = allGames.filter(
-		(g) => g.apiId === parseInt(match.params.id)
-	);
+	const game = useSelector((state) => state?.videogame);
+	const allGames = useSelector((state) => state?.allVideogames);
+
+	console.log(game);
+
+	if (allGames.length > 0) {
+		var [{ short_screenshots }] = allGames?.filter(
+			(g) => g.apiId === parseInt(match.params.id)
+		);
+	} else {
+		var short_screenshots = game.short_screenshots;
+	}
 
 	const {
 		genres,
@@ -28,9 +34,7 @@ export default function Detail({ match }) {
 		rating,
 		description,
 		released,
-		screenshots = short_screenshots
-			? short_screenshots
-			: game.background_image,
+		screenshots = short_screenshots,
 	} = game;
 
 	return (

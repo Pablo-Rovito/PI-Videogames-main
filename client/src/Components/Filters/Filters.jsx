@@ -152,7 +152,7 @@ export function ResultsPerPage({ allVideogames, results, handleResults }) {
 			</button>
 			<button
 				className={asset.button_select}
-				value={allVideogames.length}
+				value={allVideogames}
 				onClick={(e) => handleResults(e)}>
 				All
 			</button>
