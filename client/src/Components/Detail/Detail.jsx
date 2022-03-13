@@ -12,19 +12,19 @@ export default function Detail({ match }) {
 
 	useEffect(() => {
 		dispatch(searchById(match.params.id));
-	}, []);
+	}, [dispatch, match.params.id]);
 
 	const game = useSelector((state) => state?.videogame);
 	const allGames = useSelector((state) => state?.allVideogames);
 
-	console.log(game);
+	var short_screenshots = [];
 
 	if (allGames.length > 0) {
-		var [{ short_screenshots }] = allGames?.filter(
+		[{ short_screenshots }] = allGames?.filter(
 			(g) => g.apiId === parseInt(match.params.id)
 		);
 	} else {
-		var short_screenshots = game.short_screenshots;
+		short_screenshots = game.short_screenshots;
 	}
 
 	const {

@@ -1,6 +1,18 @@
 .searchBar {
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+}
+
+.top,
+.bottom {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
-	margin: 2em 0;
+}
+.top {
+	grid-row: 1;
+}
+
+.bottom {
+	grid-row: 2;
 }

@@ -8,7 +8,7 @@
 	grid-row: 1;
 	display: flex;
 	justify-content: center;
-	align-items: flex-end;
+	align-items: center;
 }
 
 .creation {
@@ -22,5 +22,5 @@
 	grid-row: 3;
 	display: flex;
 	justify-content: center;
-	align-items: flex-start;
+	align-items: center;
 }

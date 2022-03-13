@@ -5,6 +5,7 @@
 	padding: 0.1em 0.1em;
 	margin: 0.1em 0.1em;
 	height: 2em;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	transition: all 0.3s;
@@ -39,6 +40,9 @@
 	border-radius: 0.1em;
 	transition: all 0.3s;
 	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .dropdown_content {

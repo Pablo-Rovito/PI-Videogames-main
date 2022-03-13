@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Slider.module.css';
 import asset from '../../Assets/forms.module.css';
+import { IoCaretForwardOutline, IoCaretBackOutline } from 'react-icons/io5';
 
 export default function Slider({ images }) {
 	const [stateIndex, setStateIndex] = useState(0);
@@ -20,7 +21,7 @@ export default function Slider({ images }) {
 					className={asset.button_slider}
 					onClick={(e) => prevSlide(e)}
 					disabled={stateIndex === 0 ? true : false}>
-					{'<'}
+					{<IoCaretBackOutline />}
 				</button>
 			</div>
 
@@ -43,7 +44,7 @@ export default function Slider({ images }) {
 					className={asset.button_slider}
 					onClick={(e) => nextSlide(e)}
 					disabled={stateIndex === images?.length - 1 ? true : false}>
-					{'>'}
+					{<IoCaretForwardOutline />}
 				</button>
 			</div>
 		</div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
 import styles from './Nav.module.css';
+import { IoPower } from 'react-icons/io5';
 
 export default function Nav() {
 	return (
@@ -15,7 +16,9 @@ export default function Nav() {
 				<SearchBar />
 			</div>
 			<div className={styles.logOut}>
-				<NavLink to='/'>Log out</NavLink>
+				<NavLink to='/'>
+					<IoPower />
+				</NavLink>
 			</div>
 		</div>
 	);

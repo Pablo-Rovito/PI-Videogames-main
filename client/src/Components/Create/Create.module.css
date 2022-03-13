@@ -1,11 +1,86 @@
 .form_container {
 	margin: 2em 0 0 2em;
 	display: grid;
-	grid-template-rows: auto;
-	grid-gap: 1em;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 3fr 3fr 3fr 1fr;
 	justify-items: start;
 }
 
 .validInput {
-	color: #ecb365;
+	color: rgb(90, 221, 90);
+}
+
+.name,
+.description,
+.rating,
+.background_image,
+.released,
+.dropdown {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin: 0.5em 1em;
+}
+
+.name {
+	grid-row: 1;
+}
+
+.description {
+	grid-row: 2;
+}
+
+.rating {
+	grid-row: 3;
+}
+
+.background_image {
+	grid-row: 4;
+	overflow: hidden;
+}
+
+.released {
+	grid-row: 5;
+}
+
+.dropdown {
+	grid-row: 6;
+}
+
+.platform {
+	grid-row: 7;
+}
+
+.screenshots {
+	grid-row: 8;
+}
+
+.submit {
+	width: 100%;
+	grid-row: 9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0.5em 1em;
+}
+
+.dropdown,
+.platform,
+.screenshots {
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+	margin: 0.5em 1em;
+}
+
+.displayCreators,
+.field {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.field {
+	grid-row: 1;
+}
+.displayCreators {
+	grid-row: 2;
 }

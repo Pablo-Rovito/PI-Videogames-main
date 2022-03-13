@@ -4,7 +4,6 @@ import styles from './Card.module.css';
 import asset from '../../Assets/forms.module.css';
 
 export default function Card({ apiId, name, background_image, genres }) {
-	console.log(apiId);
 	return (
 		<div className={styles.card}>
 			<div className={asset.title}>

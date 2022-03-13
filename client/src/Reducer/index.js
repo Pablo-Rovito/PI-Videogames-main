@@ -3,8 +3,6 @@ const initialState = {
 	videogame: {},
 	genres: [],
 	allVideogames: [],
-	loggedIn: false,
-	refresh: true,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -20,6 +18,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
 			if (payload === 'All') {
 				return { ...state };
 			}
+
+			
 			state.videogames.forEach((game) => {
 				game.genres.forEach((genre) => {
 					if (Object.values(genre).includes(payload))
@@ -27,6 +27,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				});
 			});
 			return { ...state, videogames: filteredByGenre };
+
+
 		case 'FILTER_BY_CREATOR':
 			state.videogames = state.allVideogames;
 			var filteredByCreator = [];

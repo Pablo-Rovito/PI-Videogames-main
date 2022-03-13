@@ -17,3 +17,12 @@
 	align-items: center;
 	color: #ecb365;
 }
+
+.dropdown {
+	display: grid;
+	grid-template-rows: 3;
+}
+
+.sortSelector {
+	display: flex;
+}

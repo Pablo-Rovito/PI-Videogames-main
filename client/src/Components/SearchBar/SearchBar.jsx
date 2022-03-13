@@ -32,9 +32,12 @@ export default function SearchBar() {
 	}
 
 	return (
-		<div className={styles.searchBar}>
-			<form onSubmit={(e) => handleOnSearch(e)}>
+		<form className={styles.searchBar} onSubmit={(e) => handleOnSearch(e)}>
+			<div className={styles.top}>
 				<input className={asset.input} placeholder='Search input...' />
+			</div>
+
+			<div className={styles.bottom}>
 				<button
 					style={{ width: '8em' }}
 					className={asset.button}
@@ -46,7 +49,7 @@ export default function SearchBar() {
 					onClick={(e) => handleStateChange(e)}>
 					{byName ? 'Name' : 'ID'}
 				</button>
-			</form>
-		</div>
+			</div>
+		</form>
 	);
 }

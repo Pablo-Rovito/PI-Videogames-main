@@ -12,14 +12,13 @@ export default function Home() {
 	const dispatch = useDispatch();
 
 	const allVideogames = useSelector((state) => state.videogames);
-	const refreshState = useSelector((state) => state.refresh);
 
 	const [results, setResults] = useState(15);
 	const [loading, setLoading] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
 
 	useEffect(() => {
-		refreshState && dispatch(getGames());
+		dispatch(getGames());
 	}, [dispatch]);
 
 	useEffect(() => {

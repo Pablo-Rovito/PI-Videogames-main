@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import Card from '../Card/Card';
 import styles from './Page.module.css';
 
 export default function Page() {
 	const gamesInPage = useSelector((state) => state.videogames);
-	useEffect(() => console.log(gamesInPage), [gamesInPage]);
+
 	return (
 		<div className={styles.cardsContainer}>
-			{gamesInPage.map(({ apiId, name, background_image, genres }) => {
-				if (apiId) {
+			{gamesInPage
+				.filter((game) => game.apiId)
+				.map(({ apiId, name, background_image, genres }) => {
 					return (
 						<div key={apiId}>
 							<Card
@@ -20,8 +21,7 @@ export default function Page() {
 							/>
 						</div>
 					);
-				}
-			})}
+				})}
 		</div>
 	);
 }

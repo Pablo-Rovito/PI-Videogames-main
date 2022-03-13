@@ -1,16 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { postToDb, getGenres } from '../../Actions';
 import styles from './Create.module.css';
 import asset from '../../Assets/forms.module.css';
 import { DisplayCreators } from '../DisplayCreators/DisplayCreators';
+import { IoAddOutline, IoCheckboxOutline } from 'react-icons/io5';
 
 export default function Create() {
-	let urlRegEx = new RegExp('https?://.*.(?:png|jpg)');
-	let dateRegEx = new RegExp(
-		/(19|20)\d\d[/](0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])/
+	const urlRegEx = useMemo(() => new RegExp('https?://.*.(?:png|jpg)'), []);
+
+	const dateRegEx = useMemo(
+		() =>
+			new RegExp(
+				/(19|20)\d\d[/](0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])/
+			),
+		[]
 	);
-	let ratingRegEx = new RegExp(/([0-4][.]\d\d)|([5][.][0][0])/);
+
+	const ratingRegEx = useMemo(
+		() => new RegExp(/([0-4][.]\d\d)|([5][.][0][0])/),
+		[]
+	);
 
 	const dispatch = useDispatch();
 	const allGenres = useSelector((state) => state.genres);
@@ -67,13 +77,13 @@ export default function Create() {
 		setValidate({
 			n: newGame.name ? true : false,
 			d: newGame.description ? true : false,
-			rat: ratingRegEx.test(newGame.rating) ? true : false,
-			b: urlRegEx.test(newGame.background_image) ? true : false,
-			rel: dateRegEx.test(newGame.released) ? true : false,
+			rat: ratingRegEx.test(newGame.rating),
+			b: urlRegEx.test(newGame.background_image),
+			rel: dateRegEx.test(newGame.released),
 			p: platforms.length ? true : false,
 			g: genres.length ? true : false,
 		});
-	}, [newGame, genres, platforms]);
+	}, [newGame, genres, platforms, urlRegEx, dateRegEx, ratingRegEx]);
 
 	function handleOnChange(e) {
 		e.preventDefault();
@@ -115,10 +125,7 @@ export default function Create() {
 
 	return (
 		<div className={asset.global}>
-			<h3>CREATE NEW GAME</h3>
-			<form
-				className={styles.form_container}
-				onSubmit={(e) => handleSubmit(e)}>
+			<div className={styles.form_container}>
 				<div className={styles.name}>
 					<input
 						className={asset.input}
@@ -126,8 +133,9 @@ export default function Create() {
 						name={'name'}
 						value={newGame.name}
 						onChange={(e) => handleOnChange(e)}></input>
-					<span className={newGame.n && styles.validInput}>
-						{validate.n ? 'Correct' : 'Write a name'}
+					<span
+						className={validate.n ? styles.validInput : undefined}>
+						{validate.n ? <IoCheckboxOutline /> : 'Write a name'}
 					</span>
 				</div>
 				<div className={styles.description}>
@@ -137,8 +145,13 @@ export default function Create() {
 						name={'description'}
 						value={newGame.description}
 						onChange={(e) => handleOnChange(e)}></input>
-					<span className={newGame.d && styles.validInput}>
-						{validate.d ? 'Correct' : 'Write a description'}
+					<span
+						className={validate.d ? styles.validInput : undefined}>
+						{validate.d ? (
+							<IoCheckboxOutline />
+						) : (
+							'Write a description'
+						)}
 					</span>
 				</div>
 				<div className={styles.rating}>
@@ -148,23 +161,31 @@ export default function Create() {
 						name={'rating'}
 						value={newGame.rating}
 						onChange={(e) => handleOnChange(e)}></input>
-					<span className={newGame.rat && styles.validInput}>
-						{validate.rat
-							? 'Correct'
-							: 'Write a number between 0.00 and 5.00 with the format #.##'}
+					<span
+						className={
+							validate.rat ? styles.validInput : undefined
+						}>
+						{validate.rat ? (
+							<IoCheckboxOutline />
+						) : (
+							'Write a number between 0.00 and 5.00 with the format #.##'
+						)}
 					</span>
 				</div>
-				<div className={styles.input}>
+				<div className={styles.background_image}>
 					<input
-						className={asset.background_image}
+						className={asset.input}
 						placeholder='Poster'
 						name={'background_image'}
 						value={newGame.background_image}
 						onChange={(e) => handleOnChange(e)}></input>
-					<span className={newGame.b && styles.validInput}>
-						{validate.b
-							? 'Correct'
-							: 'Write a URL with the format https://address.jpg'}
+					<span
+						className={validate.b ? styles.validInput : undefined}>
+						{validate.b ? (
+							<IoCheckboxOutline />
+						) : (
+							'Write a URL with the format https://address.jpg'
+						)}
 					</span>
 				</div>
 				<div className={styles.released}>
@@ -174,89 +195,118 @@ export default function Create() {
 						name={'released'}
 						value={newGame.released}
 						onChange={(e) => handleOnChange(e)}></input>
-					<span className={newGame.rel && styles.validInput}>
-						{validate.rel
-							? 'Correct'
-							: 'Write a release date with the format YYYY/MM/DD'}
+					<span
+						className={
+							validate.rel ? styles.validInput : undefined
+						}>
+						{validate.rel ? (
+							<IoCheckboxOutline />
+						) : (
+							'Write a release date with the format YYYY/MM/DD'
+						)}
 					</span>
 				</div>
 				<div className={styles.platform}>
 					<form>
-						<input
-							className={asset.input}
-							placeholder='Add platform'
-							name={'platform'}
-							value={platform}
-							onChange={(e) =>
-								handleStateChange(e, setPlatform)
-							}></input>
-						<button
-							className={asset.button_select}
-							onClick={(e) =>
-								handleAddState(
-									e,
-									platform,
-									setPlatform,
-									platforms,
-									setPlatforms
-								)
-							}>
-							+
-						</button>
-						<DisplayCreators
-							state={platforms}
-							setState={setPlatforms}
-						/>
-						{validate.p
-							? 'Correct'
-							: 'Write a platform, then click +'}
+						<div className={styles.field}>
+							<input
+								className={asset.input}
+								placeholder='Add platform'
+								name={'platform'}
+								value={platform}
+								onChange={(e) =>
+									handleStateChange(e, setPlatform)
+								}></input>
+							<button
+								className={asset.button_select}
+								onClick={(e) =>
+									handleAddState(
+										e,
+										platform,
+										setPlatform,
+										platforms,
+										setPlatforms
+									)
+								}>
+								<IoAddOutline />
+							</button>
+							<span
+								className={
+									validate.p ? styles.validInput : undefined
+								}>
+								{validate.p ? (
+									<IoCheckboxOutline />
+								) : (
+									'Write a platform, then click +'
+								)}
+							</span>
+						</div>
+						<div className={styles.displayCreators}>
+							<DisplayCreators
+								state={platforms}
+								setState={setPlatforms}
+							/>
+						</div>
 					</form>
 				</div>
 				<div className={styles.screenshots}>
 					<form>
-						<input
-							className={asset.input}
-							placeholder='Add screenshots'
-							name={'add_screenshots'}
-							value={screenshot}
-							onChange={(e) =>
-								handleStateChange(e, setScreenshot)
-							}></input>
-						<button
-							disabled={!urlRegEx.test(screenshot)}
-							className={asset.button_select}
-							onClick={(e) =>
-								handleAddState(
-									e,
-									screenshot,
-									setScreenshot,
-									short_screenshots,
-									setShort_Screenshots
-								)
-							}>
-							+
-						</button>
+						<div className={styles.field}>
+							<input
+								className={asset.input}
+								placeholder='Add screenshots'
+								name={'add_screenshots'}
+								value={screenshot}
+								onChange={(e) =>
+									handleStateChange(e, setScreenshot)
+								}></input>
+							<button
+								disabled={!urlRegEx.test(screenshot)}
+								className={asset.button_select}
+								onClick={(e) =>
+									handleAddState(
+										e,
+										screenshot,
+										setScreenshot,
+										short_screenshots,
+										setShort_Screenshots
+									)
+								}>
+								<IoAddOutline />
+							</button>
+							<span
+								className={
+									urlRegEx.test(screenshot)
+										? styles.validInput
+										: undefined
+								}>
+								{urlRegEx.test(screenshot) ? (
+									<IoCheckboxOutline />
+								) : (
+									'(optional) Write a URL with the format https://address.jpg, then click +'
+								)}
+							</span>
+						</div>
+						<div className={styles.displayCreators}>
+							<DisplayCreators
+								state={short_screenshots}
+								setState={setShort_Screenshots}
+							/>
+						</div>
 					</form>
-					<DisplayCreators
-						state={short_screenshots}
-						setState={setShort_Screenshots}
-					/>
-					{urlRegEx.test(screenshot)
-						? 'Correct'
-						: '(optional) Write a URL with the format https://address.jpg, then click +'}
 				</div>
 				<div className={styles.dropdown}>
 					<form>
 						<div>
 							<div className={asset.dropdown}>
 								<button
-									class={asset.dropdown_button}
+									className={asset.dropdown_button}
 									onClick={(e) => {
 										e.preventDefault();
 									}}>
 									Add genres
 								</button>
-								<div class={asset.dropdown_content}>
+								<div className={asset.dropdown_content}>
 									{allGenres.map(({ name }) => {
 										return (
 											<button
@@ -271,42 +321,45 @@ export default function Create() {
 									})}
 								</div>
 							</div>
-							<span>
-								{genres.map((g) => {
-									{
-										return (
-											<button
-												key={g}
-												className={asset.button_select}
-												onClick={() =>
-													setGenres(
-														genres.filter(
-															(genre) =>
-																genre !== g
-														)
-													)
-												}>
-												{g}
-											</button>
-										);
-									}
-								})}
+							<span
+								className={
+									validate.g ? styles.validInput : undefined
+								}>
+								{validate.g ? (
+									<IoCheckboxOutline />
+								) : (
+									'Select genres from the dropdown menu'
+								)}
 							</span>
+							<div className={styles.displayCreators}>
+								{genres.map((g) => {
+									return (
+										<button
+											key={g}
+											className={asset.button_select}
+											onClick={() =>
+												setGenres(
+													genres.filter(
+														(genre) => genre !== g
+													)
+												)
+											}>
+											{g}
+										</button>
+									);
+								})}
+							</div>
 						</div>
-						{validate.g
-							? 'Correct'
-							: 'Select genres from the dropdown menu'}
 					</form>
 				</div>
 				<div className={styles.submit}>
 					<button
-						style={{ justifySelf: 'center', marginLeft: '-2em' }}
 						className={asset.superButton}
-						type='submit'>
+						onClick={(e) => handleSubmit(e)}>
 						Create
 					</button>
 				</div>
-			</form>
+			</div>
 		</div>
 	);
 }
