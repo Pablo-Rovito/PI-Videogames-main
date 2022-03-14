@@ -4,9 +4,9 @@ const router = express.Router();
 
 router.get(`/`, async function (req, res) {
 	try {
-		res.json(await getGenresFromApi());
+		return res.json(await getGenresFromApi());
 	} catch (e) {
-		res.json(e);
+		return res.json(e);
 	}
 });
 

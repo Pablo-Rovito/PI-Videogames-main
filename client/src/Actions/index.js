@@ -1,5 +1,9 @@
 import axios from 'axios';
 
+export function clearGames() {
+	return { type: 'CLEAR_GAMES' };
+}
+
 export function getGames() {
 	return async function (dispatch) {
 		try {
@@ -28,6 +32,10 @@ export function filterByGenres(payload) {
 	return { type: 'FILTER_BY_GENRES', payload };
 }
 
+export function setOrder(payload) {
+	return { type: 'SET_ORDER', payload };
+}
+
 export function setOrderName(payload) {
 	return { type: 'SET_ORDER_NAME', payload };
 }
@@ -51,7 +59,6 @@ export function searchByName(payload) {
 				let encodedName = encodeURIComponent(r.name);
 				sanitizedResults.push({ ...r, name: encodedName });
 			});
-
 			return dispatch({
 				type: 'SEARCH_BY_NAME',
 				payload: sanitizedResults,
@@ -69,7 +76,7 @@ export function searchById(payload) {
 			var results = await axios.get(
 				`http://localhost:3001/videogame/${payload}`
 			);
-			
+
 			return dispatch({ type: 'SEARCH_BY_ID', payload: results.data });
 		} catch (e) {
 			console.log(e);
@@ -91,12 +98,4 @@ export function postToDb(payload) {
 			return dispatch({ type: 'ADD_GAME', payload: 'Error' });
 		}
 	};
-}
-
-export function logIn() {
-	return { type: 'LOG_IN' };
-}
-
-export function logOut() {
-	return { type: 'LOG_OUT' };
 }

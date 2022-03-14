@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './Slider.module.css';
 import asset from '../../Assets/forms.module.css';
 import { IoCaretForwardOutline, IoCaretBackOutline } from 'react-icons/io5';
+import img404 from '../../Assets/404.png';
 
 export default function Slider({ images }) {
 	const [stateIndex, setStateIndex] = useState(0);
@@ -14,6 +15,11 @@ export default function Slider({ images }) {
 		e.preventDefault();
 		setStateIndex(stateIndex - 1);
 	}
+
+	const imagesSolver = images
+		? [{ id: 1, image: images }]
+		: [{ id: 1, image: img404 }];
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.prev}>
@@ -26,15 +32,16 @@ export default function Slider({ images }) {
 			</div>
 
 			<div className={styles.imageContainer}>
-				{images?.map((image, index) => {
+				{imagesSolver?.map((image, index) => {
 					return (
 						<div
+							key={image.id}
 							className={
 								stateIndex === index
 									? styles.slide_active
 									: styles.slide
 							}>
-							<img key={image.id} src={image.image} alt='' />
+							<img src={image.image} alt='' />
 						</div>
 					);
 				})}

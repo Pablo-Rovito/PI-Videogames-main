@@ -15,17 +15,12 @@ export default function Detail({ match }) {
 	}, [dispatch, match.params.id]);
 
 	const game = useSelector((state) => state?.videogame);
-	const allGames = useSelector((state) => state?.allVideogames);
+	const allGames = useSelector((state) => state?.videogames);
 
-	var short_screenshots = [];
-
-	if (allGames.length > 0) {
-		[{ short_screenshots }] = allGames?.filter(
-			(g) => g.apiId === parseInt(match.params.id)
-		);
-	} else {
-		short_screenshots = game.short_screenshots;
-	}
+	const images = allGames
+		?.filter((g) => g.id === parseInt(match.params.id))
+		?.shift()?.short_screenshots;
+	console.log(images);
 
 	const {
 		genres,
@@ -34,21 +29,27 @@ export default function Detail({ match }) {
 		rating,
 		description,
 		released,
-		screenshots = short_screenshots,
+		background_image,
 	} = game;
 
 	return (
 		<div className={asset.global}>
 			<div className={styles.container}>
 				<div className={styles.title}>
-					<h1>{name}</h1>
+					<h1>
+						{name === 'Error'
+							? "There's no game with that ID, try something else..."
+							: name}
+					</h1>
 				</div>
 
 				<div className={styles.slider}>
-					<Slider images={screenshots} />
+					{name !== 'Error' && (
+						<Slider images={images ? images : background_image} />
+					)}
 				</div>
 				<div className={styles.genres}>
-					<h4>Genres</h4>
+					{name !== 'Error' && <h4>Genres</h4>}
 					<div style={{ color: '#ecb365' }}>
 						{genres?.map((g, i) => {
 							return i === genres.length - 1 ? (
@@ -61,13 +62,13 @@ export default function Detail({ match }) {
 				</div>
 
 				<div className={styles.platforms}>
-					<h4>Platforms</h4>
+					{name !== 'Error' && <h4>Platforms</h4>}
 					<div style={{ color: '#ecb365' }}>
 						{platforms?.map((p, i) => {
 							return i === platforms.length - 1 ? (
-								<span key={p.id}>{` ${p} `}</span>
+								<span key={p}>{` ${p} `}</span>
 							) : (
-								<span key={p.id}>{` ${p} |`}</span>
+								<span key={p}>{` ${p} |`}</span>
 							);
 						})}
 					</div>
@@ -76,8 +77,14 @@ export default function Detail({ match }) {
 					className={styles.description}
 					dangerouslySetInnerHTML={{ __html: description }}
 				/>
-				<div className={styles.rating}>Rating: {rating}</div>
-				<div className={styles.released}>Released in {released}</div>
+				{name !== 'Error' && (
+					<div className={styles.rating}>Rating: {rating}</div>
+				)}
+				{name !== 'Error' && (
+					<div className={styles.released}>
+						Released in {released}
+					</div>
+				)}
 			</div>
 		</div>
 	);

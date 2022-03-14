@@ -16,18 +16,18 @@ router.get('/', async function (req, res) {
 			let resultsFromApi = await gamesFromApiQuery(name);
 			let resultsFromDb = await gamesFromDbQuery(name);
 			let results = [...resultsFromApi, ...resultsFromDb];
-			results.length === 0
+			return results.length === 0
 				? res.status(404).json({ msg: 'no se encontraron resultados' })
 				: res.json(displayRequiredDataFromAllGames(results));
 		}
 		const gamesFromApi = await getGamesFromApi();
 		const gamesFromDb = await getGamesFromDb();
-		res.json(
+		return res.json(
 			displayRequiredDataFromAllGames([...gamesFromApi, ...gamesFromDb])
 		);
 	} catch (e) {
 		console.log(e);
-		res.send('Error');
+		return res.send('Error');
 	}
 });
 

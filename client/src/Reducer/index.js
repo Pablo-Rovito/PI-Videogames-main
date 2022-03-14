@@ -7,6 +7,8 @@ const initialState = {
 
 const rootReducer = (state = initialState, { type, payload }) => {
 	switch (type) {
+		case 'CLEAR_GAMES':
+			return { ...state, videogames: [] };
 		case 'GET_GAMES':
 			state.allVideogames = payload;
 			return { ...state, videogames: payload };
@@ -19,7 +21,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				return { ...state };
 			}
 
-			
 			state.videogames.forEach((game) => {
 				game.genres.forEach((genre) => {
 					if (Object.values(genre).includes(payload))
@@ -27,8 +28,6 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				});
 			});
 			return { ...state, videogames: filteredByGenre };
-
-
 		case 'FILTER_BY_CREATOR':
 			state.videogames = state.allVideogames;
 			var filteredByCreator = [];
@@ -47,44 +46,46 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				(game) => game.created !== true
 			);
 			return { ...state, videogames: filteredByCreator };
-		case 'SET_ORDER_NAME':
+		case 'SET_ORDER':
 			return {
 				...state,
 				videogames: [...state.videogames].sort(function (a, b) {
-					if (payload === 'A-Z') {
-						return a.name > b.name ? 1 : a.name < b.name ? -1 : 0;
+					switch (payload) {
+						case 'A-Z':
+							return a.name > b.name
+								? 1
+								: a.name < b.name
+								? -1
+								: 0;
+						case 'Z-A':
+							return a.name > b.name
+								? -1
+								: a.name < b.name
+								? 1
+								: 0;
+						case '0-5':
+							return a.rating > b.rating
+								? 1
+								: a.rating < b.rating
+								? -1
+								: 0;
+						case '5-0':
+							return a.rating > b.rating
+								? -1
+								: a.rating < b.rating
+								? 1
+								: 0;
+						default:
+							return 'Error';
 					}
-					return a.name > b.name ? -1 : a.name < b.name ? 1 : 0;
-				}),
-			};
-		case 'SET_ORDER_RATING':
-			return {
-				...state,
-				videogames: [...state.videogames].sort(function (a, b) {
-					if (payload === '0-10') {
-						return a.rating > b.rating
-							? 1
-							: a.rating < b.rating
-							? -1
-							: 0;
-					}
-					return a.rating > b.rating
-						? -1
-						: a.rating < b.rating
-						? 1
-						: 0;
 				}),
 			};
 		case 'SEARCH_BY_NAME':
-			return { ...state, videogames: payload, refresh: false };
+			return { ...state, videogames: payload };
 		case 'SEARCH_BY_ID':
-			return { ...state, videogame: payload, refresh: false };
+			return { ...state, videogame: payload };
 		case 'ADD_GAME':
 			return { ...state, videogames: [payload] };
-		case 'LOG_IN':
-			return { ...state, loggedIn: true };
-		case 'LOG_OUT':
-			return { ...state, loggedIn: false };
 		default:
 			return { ...state };
 	}

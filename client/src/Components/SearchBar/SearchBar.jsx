@@ -16,25 +16,21 @@ export default function SearchBar() {
 
 	function handleOnSearch(e) {
 		e.preventDefault();
-		if (window.location.href === 'http://localhost:3000/home') {
-			if (e.target[0].value === '') {
-				alert('There is nothing to look for');
-			} else {
-				byName
-					? dispatch(searchByName(e.target[0].value))
-					: window.location.assign(
-							`http://localhost:3000/detail/${e.target[0].value}`
-					  );
-			}
+		if (e.target[0].value === '') {
+			alert(`You are a fast clicker... write something first!`);
 		} else {
-			alert('The search must be done from homepage');
+			byName
+				? dispatch(searchByName(e.target[0].value))
+				: window.location.assign(
+						`http://localhost:3000/detail/${e.target[0].value}`
+				  );
 		}
 	}
 
 	return (
 		<form className={styles.searchBar} onSubmit={(e) => handleOnSearch(e)}>
 			<div className={styles.top}>
-				<input className={asset.input} placeholder='Search input...' />
+				<input className={asset.input} placeholder='Search...' />
 			</div>
 
 			<div className={styles.bottom}>

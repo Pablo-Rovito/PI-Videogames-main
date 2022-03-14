@@ -5,6 +5,7 @@ import Detail from './Components/Detail/Detail';
 import Create from './Components/Create/Create';
 import Home from './Components/Home/Home';
 import Nav from './Components/Nav/Nav';
+import About from './Components/About/About';
 import styles from './App.module.css';
 import './normalize.css';
 import SidePanel from './Components/SidePanel/SidePanel';
@@ -14,7 +15,7 @@ export default function App() {
 		<div className={styles.app}>
 			<div className={styles.background}></div>
 			<div className={styles.nav}>
-				<Route path={['/home', './detail/', '/create', '/about']}>
+				<Route path={['/home', '/detail/', '/create', '/about']}>
 					<Nav />
 				</Route>
 			</div>
@@ -29,6 +30,7 @@ export default function App() {
 					<Route exact path='/detail/:id' component={Detail} />
 					<Route exact path='/create' component={Create} />
 					<Route exact path='/home' component={Home} />
+					<Route exact path='/about' component={About} />
 					<Redirect to='/' />
 				</Switch>
 			</div>

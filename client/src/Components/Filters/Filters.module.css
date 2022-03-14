@@ -18,6 +18,11 @@
 	color: #ecb365;
 }
 
+.buttons {
+	display: flex;
+	margin: 0 0.5em;
+}
+
 .dropdown {
 	display: grid;
 	grid-template-rows: 3;

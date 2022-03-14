@@ -47,7 +47,7 @@
 
 .dropdown_content {
 	bottom: 1.8em;
-	left: 1em;
+	left: 5em;
 	display: none;
 	position: absolute;
 	background-color: transparent;
@@ -77,10 +77,6 @@
 	text-align: start;
 	border: solid 1px transparent;
 	border-radius: 0.1em;
-	padding: 0.1em 0.1em;
-	margin: 0.1em 0.1em;
-	width: 12em;
-	height: 1.6em;
 	justify-content: center;
 	background-color: rgba(0, 0, 0, 0.404);
 	align-items: center;
@@ -88,14 +84,19 @@
 }
 .input {
 	color: #ecb365;
+	padding: 0.1em 0.1em;
+	margin: 0.1em 0.1em;
+	width: 12em;
+	height: 1.6em;
 }
 
 .dropdown_button {
-	color: azure;
-	opacity: 0.5;
+	color: rgba(240, 255, 255, 0.5);
+	opacity: 1;
 	transition: all 0.3s;
 	cursor: pointer;
-	height: 2em;
+	width: 12.45em;
+	height: 1.95em;
 }
 
 .dropdown:hover .dropdown_content {
@@ -106,6 +107,7 @@
 	overflow: scroll;
 }
 
+.dropdown_button:hover,
 .dropdown:hover .dropdown_button {
 	color: #ecb365;
 	background-color: transparent;
@@ -133,6 +135,12 @@
 .button_slider,
 .input:focus {
 	outline: none;
+}
+
+.active .button_select {
+	animation-name: whiteGlow;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
 }
 
 .input::placeholder {
@@ -223,11 +231,28 @@
 }
 
 .global {
-	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9));
+	background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.1));
 	color: rgb(240 255 255);
 	backdrop-filter: blur(1px);
 	border: none;
 	width: 100%;
 	height: auto;
 	overflow: scroll;
+}
+
+@keyframes whiteGlow {
+	from {
+		background-color: transparent;
+		box-shadow: 0 0 0 0 #ffffff3a;
+	}
+
+	50% {
+		background-color: #ffffff3a;
+		box-shadow: 0 0 1em 0.02em #ffffff3a;
+	}
+
+	to {
+		background-color: transparent;
+		box-shadow: 0 0 0 0 #ffffff3a;
+	}
 }

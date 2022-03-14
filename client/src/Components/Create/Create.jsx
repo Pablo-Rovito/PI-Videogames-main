@@ -12,7 +12,7 @@ export default function Create() {
 	const dateRegEx = useMemo(
 		() =>
 			new RegExp(
-				/(19|20)\d\d[/](0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])/
+				/(19|20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])/
 			),
 		[]
 	);
@@ -134,6 +134,7 @@ export default function Create() {
 						value={newGame.name}
 						onChange={(e) => handleOnChange(e)}></input>
 					<span
+						style={{ marginLeft: '1em' }}
 						className={validate.n ? styles.validInput : undefined}>
 						{validate.n ? <IoCheckboxOutline /> : 'Write a name'}
 					</span>
@@ -146,6 +147,7 @@ export default function Create() {
 						value={newGame.description}
 						onChange={(e) => handleOnChange(e)}></input>
 					<span
+						style={{ marginLeft: '1em' }}
 						className={validate.d ? styles.validInput : undefined}>
 						{validate.d ? (
 							<IoCheckboxOutline />
@@ -162,6 +164,7 @@ export default function Create() {
 						value={newGame.rating}
 						onChange={(e) => handleOnChange(e)}></input>
 					<span
+						style={{ marginLeft: '1em' }}
 						className={
 							validate.rat ? styles.validInput : undefined
 						}>
@@ -180,11 +183,12 @@ export default function Create() {
 						value={newGame.background_image}
 						onChange={(e) => handleOnChange(e)}></input>
 					<span
+						style={{ marginLeft: '1em' }}
 						className={validate.b ? styles.validInput : undefined}>
 						{validate.b ? (
 							<IoCheckboxOutline />
 						) : (
-							'Write a URL with the format https://address.jpg'
+							`Write a URL "https://address.jpg"`
 						)}
 					</span>
 				</div>
@@ -196,15 +200,74 @@ export default function Create() {
 						value={newGame.released}
 						onChange={(e) => handleOnChange(e)}></input>
 					<span
+						style={{ marginLeft: '1em' }}
 						className={
 							validate.rel ? styles.validInput : undefined
 						}>
 						{validate.rel ? (
 							<IoCheckboxOutline />
 						) : (
-							'Write a release date with the format YYYY/MM/DD'
+							'Write a release date with the format YYYY-MM-DD'
 						)}
 					</span>
+				</div>
+				<div className={styles.dropdown}>
+					<form>
+						<div className={styles.field}>
+							<div className={asset.dropdown}>
+								<button
+									className={asset.dropdown_button}
+									onClick={(e) => {
+										e.preventDefault();
+									}}>
+									Add genres
+								</button>
+								<div className={asset.dropdown_content}>
+									{allGenres.map(({ name }) => {
+										return (
+											<button
+												key={name}
+												value={name}
+												onClick={(e) =>
+													handleAddGenre(e)
+												}>
+												{name}
+											</button>
+										);
+									})}
+								</div>
+							</div>
+							<span
+								style={{ marginLeft: '1em' }}
+								className={
+									validate.g ? styles.validInput : undefined
+								}>
+								{validate.g ? (
+									<IoCheckboxOutline />
+								) : (
+									'Select genres from the dropdown menu'
+								)}
+							</span>
+						</div>
+						<div className={styles.displayCreators}>
+							{genres.map((g) => {
+								return (
+									<button
+										key={g}
+										className={asset.button_select}
+										onClick={() =>
+											setGenres(
+												genres.filter(
+													(genre) => genre !== g
+												)
+											)
+										}>
+										{g}
+									</button>
+								);
+							})}
+						</div>
+					</form>
 				</div>
 				<div className={styles.platform}>
 					<form>
@@ -231,6 +294,7 @@ export default function Create() {
 								<IoAddOutline />
 							</button>
 							<span
+								style={{ marginLeft: '1em' }}
 								className={
 									validate.p ? styles.validInput : undefined
 								}>
@@ -275,6 +339,7 @@ export default function Create() {
 								<IoAddOutline />
 							</button>
 							<span
+								style={{ marginLeft: '1em' }}
 								className={
 									urlRegEx.test(screenshot)
 										? styles.validInput
@@ -283,7 +348,7 @@ export default function Create() {
 								{urlRegEx.test(screenshot) ? (
 									<IoCheckboxOutline />
 								) : (
-									'(optional) Write a URL with the format https://address.jpg, then click +'
+									'(optional) Write a URL "https://address.jpg", then click +'
 								)}
 							</span>
 						</div>
@@ -292,63 +357,6 @@ export default function Create() {
 								state={short_screenshots}
 								setState={setShort_Screenshots}
 							/>
-						</div>
-					</form>
-				</div>
-				<div className={styles.dropdown}>
-					<form>
-						<div>
-							<div className={asset.dropdown}>
-								<button
-									className={asset.dropdown_button}
-									onClick={(e) => {
-										e.preventDefault();
-									}}>
-									Add genres
-								</button>
-								<div className={asset.dropdown_content}>
-									{allGenres.map(({ name }) => {
-										return (
-											<button
-												key={name}
-												value={name}
-												onClick={(e) =>
-													handleAddGenre(e)
-												}>
-												{name}
-											</button>
-										);
-									})}
-								</div>
-							</div>
-							<span
-								className={
-									validate.g ? styles.validInput : undefined
-								}>
-								{validate.g ? (
-									<IoCheckboxOutline />
-								) : (
-									'Select genres from the dropdown menu'
-								)}
-							</span>
-							<div className={styles.displayCreators}>
-								{genres.map((g) => {
-									return (
-										<button
-											key={g}
-											className={asset.button_select}
-											onClick={() =>
-												setGenres(
-													genres.filter(
-														(genre) => genre !== g
-													)
-												)
-											}>
-											{g}
-										</button>
-									);
-								})}
-							</div>
 						</div>
 					</form>
 				</div>

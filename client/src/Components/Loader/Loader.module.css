@@ -1,25 +1,21 @@
-.sidePanel {
+.imageContainer {
 	height: 100%;
+	width: 100%;
 	display: grid;
-	grid-template-rows: 1fr 1fr 1fr;
+	grid-template-rows: 10em 9fr 1fr 17em;
+	grid-template-columns: 1fr;
 }
 
-.search {
-	grid-row: 1;
+.title {
+	grid-row: 3;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100%;
 }
 
-.filters {
+.image {
 	grid-row: 2;
 	display: flex;
-	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-}
-
-.reset {
-	grid-row: 3;
 }

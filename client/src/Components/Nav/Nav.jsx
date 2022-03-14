@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import SearchBar from '../SearchBar/SearchBar';
 import styles from './Nav.module.css';
 import { IoPower } from 'react-icons/io5';
+import henryLogo from '../../Assets/henryLogo.png';
 
 export default function Nav() {
 	return (
@@ -12,8 +12,17 @@ export default function Nav() {
 				<NavLink to='/create'>CREATE</NavLink>
 				<NavLink to='/about'>ABOUT</NavLink>
 			</div>
-			<div className={styles.searchBar}>
-				<SearchBar />
+			<div className={styles.topLeft}>
+				<a
+					href='https://www.soyhenry.com/'
+					target='_blank'
+					rel='noreferrer noopener'>
+					<img
+						src={henryLogo}
+						alt=''
+						style={{ maxHeight: '60%', maxWidth: '60%' }}
+					/>
+				</a>
 			</div>
 			<div className={styles.logOut}>
 				<NavLink to='/'>

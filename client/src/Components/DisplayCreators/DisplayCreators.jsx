@@ -1,9 +1,10 @@
 import React from 'react';
 import asset from '../../Assets/forms.module.css';
+import styles from "./DisplayCreators.module.css"
 
 export function DisplayCreators({ state, setState }) {
 	return (
-		<div>
+		<div className={styles.general}>
 			{state.map((s) => {
 				return (
 					<button

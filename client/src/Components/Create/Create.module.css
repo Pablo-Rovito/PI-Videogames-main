@@ -1,7 +1,7 @@
 .form_container {
 	margin: 2em 0 0 2em;
 	display: grid;
-	grid-template-rows: 1fr 1fr 1fr 1fr 1fr 3fr 3fr 3fr 1fr;
+	grid-template-rows: 3em 3em 3em 3em 3em 9em 9em 9em 3em;
 	justify-items: start;
 }
 
@@ -17,6 +17,7 @@
 .dropdown {
 	display: flex;
 	justify-content: flex-start;
+	align-self: flex-start;
 	align-items: center;
 	margin: 0.5em 1em;
 }
@@ -75,7 +76,9 @@
 .field {
 	display: flex;
 	justify-content: flex-start;
+	align-content: center;
 	align-items: center;
+	flex-wrap: wrap;
 }
 
 .field {
@@ -83,4 +86,6 @@
 }
 .displayCreators {
 	grid-row: 2;
+	max-height: 100%;
+	overflow: scroll;
 }
