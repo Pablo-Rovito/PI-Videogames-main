@@ -16,9 +16,11 @@ export default function Slider({ images }) {
 		setStateIndex(stateIndex - 1);
 	}
 
-	const imagesSolver = images
-		? [{ id: 1, image: images }]
-		: [{ id: 1, image: img404 }];
+	if (!images || images.length === 0) {
+		images = [{ id: 1, image: img404 }];
+	} else if (typeof images === 'string') {
+		images = [{ id: 1, image: images }];
+	}
 
 	return (
 		<div className={styles.container}>
@@ -32,20 +34,21 @@ export default function Slider({ images }) {
 			</div>
 
 			<div className={styles.imageContainer}>
-				{imagesSolver?.map((image, index) => {
+				{images?.map((image, index) => {
 					return (
 						<div
-							key={image.id}
+							key={image?.id}
 							className={
 								stateIndex === index
 									? styles.slide_active
 									: styles.slide
 							}>
-							<img src={image.image} alt='' />
+							<img src={image?.image} alt='' />
 						</div>
 					);
 				})}
 			</div>
+
 			<div className={styles.next}>
 				<button
 					className={asset.button_slider}

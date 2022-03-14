@@ -18,9 +18,12 @@ export default function Detail({ match }) {
 	const allGames = useSelector((state) => state?.videogames);
 
 	const images = allGames
-		?.filter((g) => g.id === parseInt(match.params.id))
+		?.filter((g) =>
+			g.apiId ? g.apiId : g.id === parseInt(match.params.id)
+		)
 		?.shift()?.short_screenshots;
-	console.log(images);
+
+	console.log(allGames, images);
 
 	const {
 		genres,
