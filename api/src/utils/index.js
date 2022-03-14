@@ -167,34 +167,37 @@ module.exports = {
 		}
 	},
 	postGameToDb: async function (data) {
+		const {
+			name,
+			description,
+			rating,
+			background_image,
+			released,
+			genres,
+			platforms,
+			short_screenshots,
+		} = data;
+
 		try {
-			let {
+			const newGame = await Videogame.create({
 				name,
 				description,
 				rating,
 				background_image,
 				released,
-				genres,
 				platforms,
 				short_screenshots,
-			} = data;
-			let newGame = await Videogame.findOrCreate({
-				where: {
-					name,
-					description,
-					rating,
-					background_image,
-					released,
-					platforms,
-					short_screenshots,
-				},
 			});
-			let genre = await Genre.findAll({
+
+			const gDB = await Genre.findAll({
 				where: { name: genres },
 			});
-			newGame.addGenre(genre);
+
+			await newGame.addGenre(gDB);
+
+			return res.json({ msg: 'Game created' });
 		} catch (e) {
-			return e;
+			return res.json(e);
 		}
 	},
 };

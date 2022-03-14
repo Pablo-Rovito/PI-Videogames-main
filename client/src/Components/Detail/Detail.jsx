@@ -22,8 +22,7 @@ export default function Detail({ match }) {
 			g.apiId ? g.apiId : g.id === parseInt(match.params.id)
 		)
 		?.shift()?.short_screenshots;
-
-	console.log(allGames, images);
+	console.log(images);
 
 	const {
 		genres,
