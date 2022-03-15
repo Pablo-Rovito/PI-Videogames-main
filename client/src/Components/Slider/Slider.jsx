@@ -20,6 +20,10 @@ export default function Slider({ images }) {
 		images = [{ id: 1, image: img404 }];
 	} else if (typeof images === 'string') {
 		images = [{ id: 1, image: images }];
+	} else if (typeof images[0] === 'string') {
+		images = images.map((i) => {
+			return { id: i, image: i };
+		});
 	}
 
 	return (

@@ -17,20 +17,23 @@ export default function Detail({ match }) {
 	const game = useSelector((state) => state?.videogame);
 	const allGames = useSelector((state) => state?.videogames);
 
-	/* 	const [{ short_screenshots }] = allGames?.filter((g) => {
-		return (g.apiId ? g.apiId : g.id) === parseInt(match.params.id);
-	})
-		? allGames?.filter((g) => {
-				return (g.apiId ? g.apiId : g.id) === parseInt(match.params.id);
-		  })
-		: []; */
-
 	const [gameFromList] = allGames?.filter((g) => {
+		if (g?.id?.length > 20) {
+			return g?.id === match.params.id;
+		}
 		return (g.apiId ? g.apiId : g.id) === parseInt(match.params.id);
 	});
+	
 	const short_screenshots = gameFromList?.short_screenshots
 		? gameFromList.short_screenshots
 		: [];
+
+	console.log(`game: `);
+	console.log(game);
+	console.log(`allGames `);
+	console.log(allGames);
+	console.log(`gameFromList: `);
+	console.log(gameFromList);
 
 	const {
 		genres,

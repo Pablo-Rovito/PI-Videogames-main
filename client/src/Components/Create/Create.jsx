@@ -98,6 +98,7 @@ export default function Create() {
 		let { n, d, rat, b, rel, p, g } = validate;
 		if (n && d && rat && b && rel && p && g) {
 			setNewGame((newGame.rating = parseFloat(newGame.rating)));
+
 			dispatch(
 				postToDb({
 					...newGame,
