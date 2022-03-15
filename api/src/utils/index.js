@@ -166,6 +166,17 @@ module.exports = {
 			return e;
 		}
 	},
+	getDetailFromDb: async function (id) {
+		try {
+			const games = await Videogame.findAll({
+				where: { id: id },
+			});
+
+			return games[0];
+		} catch (e) {
+			return e;
+		}
+	},
 	postGameToDb: async function (data) {
 		const {
 			name,
