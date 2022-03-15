@@ -17,12 +17,20 @@ export default function Detail({ match }) {
 	const game = useSelector((state) => state?.videogame);
 	const allGames = useSelector((state) => state?.videogames);
 
-	const images = allGames
-		?.filter((g) =>
-			g.apiId ? g.apiId : g.id === parseInt(match.params.id)
-		)
-		?.shift()?.short_screenshots;
-	console.log(images);
+	/* 	const [{ short_screenshots }] = allGames?.filter((g) => {
+		return (g.apiId ? g.apiId : g.id) === parseInt(match.params.id);
+	})
+		? allGames?.filter((g) => {
+				return (g.apiId ? g.apiId : g.id) === parseInt(match.params.id);
+		  })
+		: []; */
+
+	const [gameFromList] = allGames?.filter((g) => {
+		return (g.apiId ? g.apiId : g.id) === parseInt(match.params.id);
+	});
+	const short_screenshots = gameFromList?.short_screenshots
+		? gameFromList.short_screenshots
+		: [];
 
 	const {
 		genres,
@@ -47,7 +55,13 @@ export default function Detail({ match }) {
 
 				<div className={styles.slider}>
 					{name !== 'Error' && (
-						<Slider images={images ? images : background_image} />
+						<Slider
+							images={
+								short_screenshots.length > 0
+									? short_screenshots
+									: background_image
+							}
+						/>
 					)}
 				</div>
 				<div className={styles.genres}>
