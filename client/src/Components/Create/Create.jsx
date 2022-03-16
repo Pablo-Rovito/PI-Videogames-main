@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { postToDb, getGenres } from '../../Actions';
+import { postToDb, getGenres, clearGames } from '../../Actions';
 import styles from './Create.module.css';
 import asset from '../../Assets/forms.module.css';
 import { DisplayCreators } from '../DisplayCreators/DisplayCreators';
@@ -120,6 +120,7 @@ export default function Create() {
 					short_screenshots,
 				})
 			);
+			dispatch(clearGames());
 
 			setNewGame({
 				name: '',

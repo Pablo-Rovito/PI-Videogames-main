@@ -28,8 +28,6 @@ export default function Detail({ match }) {
 		? gameFromList.short_screenshots
 		: [];
 
-	console.log(game);
-
 	const {
 		genres,
 		name,
