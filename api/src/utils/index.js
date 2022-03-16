@@ -58,7 +58,7 @@ module.exports = {
 					short_screenshots,
 				}) => {
 					return {
-						apiId: id,
+						id,
 						name,
 						rating,
 						description: description
@@ -85,7 +85,6 @@ module.exports = {
 		return games.map(
 			({
 				id,
-				apiId,
 				name,
 				description,
 				rating,
@@ -98,7 +97,6 @@ module.exports = {
 			}) => {
 				return {
 					id,
-					apiId,
 					name,
 					description: description
 						? description

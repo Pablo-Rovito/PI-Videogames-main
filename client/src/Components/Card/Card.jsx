@@ -6,7 +6,7 @@ import styles from './Card.module.css';
 import asset from '../../Assets/forms.module.css';
 import img404 from '../../Assets/404.png';
 
-export default function Card({ id, apiId, name, background_image, genres }) {
+export default function Card({ id, name, background_image, genres }) {
 	const displayImage = background_image ? background_image : img404;
 
 	return (
@@ -14,7 +14,7 @@ export default function Card({ id, apiId, name, background_image, genres }) {
 			className={styles.card}
 			style={{ backgroundImage: { displayImage } }}>
 			<div className={asset.title}>
-				<Link to={`/detail/${apiId ? apiId : id}`}>
+				<Link to={`/detail/${id}`}>
 					<h4>{decodeURIComponent(name).toUpperCase()}</h4>
 				</Link>
 			</div>

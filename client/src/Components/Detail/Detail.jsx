@@ -21,7 +21,7 @@ export default function Detail({ match }) {
 		if (g?.id?.length > 20) {
 			return g?.id === match.params.id;
 		}
-		return (g.apiId ? g.apiId : g.id) === parseInt(match.params.id);
+		return (g.id) === parseInt(match.params.id);
 	});
 
 	const short_screenshots = gameFromList?.short_screenshots
