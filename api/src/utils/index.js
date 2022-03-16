@@ -170,6 +170,10 @@ module.exports = {
 		try {
 			const games = await Videogame.findAll({
 				where: { id: id },
+				include: {
+					model: Genre,
+					attributes: ['id', 'name'],
+				},
 			});
 
 			return games[0];

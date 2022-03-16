@@ -364,7 +364,7 @@ export default function Create() {
 				</div>
 				<div className={styles.submit}>
 					<button
-						className={asset.superButton}
+						className={asset.button}
 						onClick={(e) => handleSubmit(e)}>
 						Create
 					</button>

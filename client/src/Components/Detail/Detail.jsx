@@ -28,12 +28,7 @@ export default function Detail({ match }) {
 		? gameFromList.short_screenshots
 		: [];
 
-	console.log(`game: `);
 	console.log(game);
-	console.log(`allGames `);
-	console.log(allGames);
-	console.log(`gameFromList: `);
-	console.log(gameFromList);
 
 	const {
 		genres,

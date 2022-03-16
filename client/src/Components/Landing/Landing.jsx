@@ -15,7 +15,7 @@ export default function Landing(params) {
 			<div className={styles.button}>
 				<button
 					onClick={(e) => navigateOnClick(e)}
-					className={asset.superButton}>
+					className={asset.button}>
 					Enter
 				</button>
 			</div>
