@@ -22,35 +22,8 @@ router.get(`/:id`, async function (req, res) {
 });
 
 router.post('/', async function (req, res) {
-	/* const {
-		name,
-		description,
-		rating,
-		background_image,
-		released,
-		genres,
-		platforms,
-		short_screenshots,
-	} = req.body;
- */
 	try {
 		const response = await postGameToDb(req.body);
-
-		/* const newGame = await Videogame.create({
-			name,
-			description,
-			rating,
-			background_image,
-			released,
-			platforms,
-			short_screenshots,
-		});
-
-		const gDB = await Genre.findAll({
-			where: { name: genres },
-		});
-
-		await newGame.addGenre(gDB); */
 
 		return res.json(response);
 	} catch (e) {

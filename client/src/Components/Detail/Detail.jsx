@@ -21,7 +21,7 @@ export default function Detail({ match }) {
 		if (g?.id?.length > 20) {
 			return g?.id === match.params.id;
 		}
-		return (g.apiId ? g.apiId : g.id) === parseInt(match.params.id);
+		return g.id === parseInt(match.params.id);
 	});
 
 	const short_screenshots = gameFromList?.short_screenshots
@@ -38,19 +38,21 @@ export default function Detail({ match }) {
 		background_image,
 	} = game;
 
+	const errors = ['Error', 'SequelizeDatabaseError'];
+
 	return (
 		<div className={asset.global}>
 			<div className={styles.container}>
 				<div className={styles.title}>
 					<h1>
-						{name === 'Error'
+						{errors.includes(name)
 							? "There's no game with that ID, try something else..."
 							: name}
 					</h1>
 				</div>
 
 				<div className={styles.slider}>
-					{name !== 'Error' && (
+					{!errors.includes(name) && (
 						<Slider
 							images={
 								short_screenshots.length > 0
@@ -61,7 +63,7 @@ export default function Detail({ match }) {
 					)}
 				</div>
 				<div className={styles.genres}>
-					{name !== 'Error' && <h4>Genres</h4>}
+					{!errors.includes(name) && <h4>Genres</h4>}
 					<div style={{ color: '#ecb365' }}>
 						{genres?.map((g, i) => {
 							return i === genres.length - 1 ? (
@@ -74,7 +76,7 @@ export default function Detail({ match }) {
 				</div>
 
 				<div className={styles.platforms}>
-					{name !== 'Error' && <h4>Platforms</h4>}
+					{!errors.includes(name) && <h4>Platforms</h4>}
 					<div style={{ color: '#ecb365' }}>
 						{platforms?.map((p, i) => {
 							return i === platforms.length - 1 ? (
@@ -89,10 +91,10 @@ export default function Detail({ match }) {
 					className={styles.description}
 					dangerouslySetInnerHTML={{ __html: description }}
 				/>
-				{name !== 'Error' && (
+				{!errors.includes(name) && (
 					<div className={styles.rating}>Rating: {rating}</div>
 				)}
-				{name !== 'Error' && (
+				{!errors.includes(name) && (
 					<div className={styles.released}>
 						Released in {released}
 					</div>

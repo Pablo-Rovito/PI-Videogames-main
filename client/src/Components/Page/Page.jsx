@@ -6,12 +6,12 @@ export default function Page({ gamesInPage }) {
 	return (
 		<div className={styles.cardsContainer}>
 			{gamesInPage
-				.filter((game) => game.apiId || game.id)
-				.map(({ id, apiId, name, background_image, genres }) => {
+				.filter((game) => game.id)
+				.map(({ id, name, background_image, genres }) => {
 					return (
-						<div key={apiId ? apiId : id}>
+						<div key={id}>
 							<Card
-								apiId={apiId ? apiId : id}
+								id={id}
 								name={name}
 								background_image={background_image}
 								genres={genres}

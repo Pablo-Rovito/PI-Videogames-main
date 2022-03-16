@@ -23,6 +23,7 @@ export default function Create() {
 	);
 
 	const dispatch = useDispatch();
+	
 	const allGenres = useSelector((state) => state.genres);
 	if (allGenres.length === 0) {
 		dispatch(getGenres());

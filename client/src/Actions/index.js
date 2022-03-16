@@ -84,7 +84,6 @@ export function searchById(payload) {
 			var results = await axios.get(
 				`http://localhost:3001/videogame/${payload}`
 			);
-
 			return dispatch({ type: 'SEARCH_BY_ID', payload: results.data });
 		} catch (e) {
 			console.log(e);
