@@ -45,7 +45,7 @@ export default function Home() {
 		</div>
 	) : allVideogames === 'Error' ? (
 		<div>
-			<h3>Nothing found...</h3>
+			<h3>Nothing found</h3>
 			<img className={styles.img} src={img404} alt='' />
 		</div>
 	) : (

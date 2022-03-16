@@ -3,6 +3,7 @@ const initialState = {
 	videogame: {},
 	genres: [],
 	allVideogames: [],
+	nonAssociative: false,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -12,17 +13,17 @@ const rootReducer = (state = initialState, { type, payload }) => {
 		case 'CLEAR_DETAIL':
 			return { ...state, videogame: {} };
 		case 'GET_GAMES':
-			state.allVideogames = payload;
-			return { ...state, videogames: payload };
+			return { ...state, allVideogames: payload, videogames: payload };
 		case 'GET_GENRES':
 			return { ...state, genres: payload };
+		case 'SWITCH_GENRE_FILTERING':
+			return { ...state, nonAssociative: !state.nonAssociative };
 		case 'FILTER_BY_GENRES':
-			state.videogames = state.allVideogames;
+			state.nonAssociative && (state.videogames = state.allVideogames);
 			var filteredByGenre = [];
 			if (payload === 'All') {
 				return { ...state };
 			}
-
 			state.videogames.forEach((game) => {
 				game.genres.forEach((genre) => {
 					if (Object.values(genre).includes(payload))
@@ -83,7 +84,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				}),
 			};
 		case 'SEARCH_BY_NAME':
-			return { ...state, videogames: payload };
+			return { ...state, allVideogames: payload, videogames: payload };
 		case 'SEARCH_BY_ID':
 			return { ...state, videogame: payload };
 		case 'ADD_GAME':

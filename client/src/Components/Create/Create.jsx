@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { postToDb, getGenres } from '../../Actions';
+import { postToDb, getGenres, clearGames } from '../../Actions';
 import styles from './Create.module.css';
 import asset from '../../Assets/forms.module.css';
 import { DisplayCreators } from '../DisplayCreators/DisplayCreators';
@@ -27,6 +27,9 @@ export default function Create() {
 	if (allGenres.length === 0) {
 		dispatch(getGenres());
 	}
+
+	const [showAlert, setShowAlert] = useState(false);
+	const [showSuccess, setShowSuccess] = useState(false);
 
 	const [newGame, setNewGame] = useState({
 		name: '',
@@ -73,6 +76,16 @@ export default function Create() {
 		}
 	}
 
+	function handleAlert(e) {
+		e.preventDefault();
+		setShowAlert(false);
+	}
+
+	function handleSuccess(e) {
+		e.preventDefault();
+		setShowSuccess(false);
+	}
+
 	useEffect(() => {
 		setValidate({
 			n: newGame.name ? true : false,
@@ -107,6 +120,7 @@ export default function Create() {
 					short_screenshots,
 				})
 			);
+			dispatch(clearGames());
 
 			setNewGame({
 				name: '',
@@ -119,9 +133,9 @@ export default function Create() {
 			setGenres([]);
 			setShort_Screenshots([]);
 
-			alert('Congrats, game created!');
+			setShowSuccess(true);
 		} else {
-			alert('There are errors in the inputs');
+			setShowAlert(true);
 		}
 	}
 
@@ -363,6 +377,34 @@ export default function Create() {
 					</form>
 				</div>
 				<div className={styles.submit}>
+					{showSuccess && (
+						<div className={styles.alert}>
+							{'Success! Game created  '}
+							<button
+								style={{
+									minWidth: '2em',
+									margin: '0 1em',
+								}}
+								className={asset.button_select}
+								onClick={(e) => handleSuccess(e)}>
+								X
+							</button>
+						</div>
+					)}
+					{showAlert && (
+						<div className={styles.alert}>
+							{'There are errors in the inputs  '}
+							<button
+								style={{
+									minWidth: '2em',
+									margin: '0 1em',
+								}}
+								className={asset.button_select}
+								onClick={(e) => handleAlert(e)}>
+								X
+							</button>
+						</div>
+					)}
 					<button
 						className={asset.button}
 						onClick={(e) => handleSubmit(e)}>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import {
 	getGames,
 	getGenres,
+	switchAssociativity,
 	filterByGenres,
 	filterByCreator,
 	setOrder,
@@ -17,11 +18,17 @@ export default function SidePanel() {
 	const dispatch = useDispatch();
 	useEffect(() => dispatch(getGenres()), [dispatch]);
 	const allGenres = useSelector((state) => state.genres);
+	const nonAssociative = useSelector((state) => state.nonAssociative);
 
 	function handleReset(e) {
 		e.preventDefault();
 		dispatch(clearGames());
 		dispatch(getGames());
+	}
+
+	function handleAssociativity(e) {
+		e.preventDefault();
+		dispatch(switchAssociativity());
 	}
 
 	return (
@@ -53,6 +60,15 @@ export default function SidePanel() {
 					actionOnClick={filterByGenres}
 					placeholder={'Filter by genre'}
 				/>
+				<button
+					onClick={(e) => {
+						handleAssociativity(e);
+					}}
+					className={asset.dropdown_button}>
+					{nonAssociative
+						? 'Single genre filtering'
+						: 'Multi genre filtering'}
+				</button>
 				<button
 					onClick={(e) => {
 						handleReset(e);

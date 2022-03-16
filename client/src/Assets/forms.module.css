@@ -4,11 +4,13 @@
 	text-shadow: 0 0 0.1em black;
 	border-radius: 0.1em;
 	padding: 0.1em 0.1em;
-	margin: 0.1em 0.1em;
+	margin: 0.2em;
 	height: 2em;
-	display: flex;
 	justify-content: center;
+	justify-items: center;
 	align-items: center;
+	text-justify: center;
+	text-align: center;
 	transition: all 0.3s;
 	cursor: pointer;
 }

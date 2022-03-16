@@ -2,8 +2,10 @@
 	display: grid;
 	grid-template-rows: 1fr 2fr 4fr 3fr;
 	background-color: rgba(0, 0, 0, 0.6);
+
+	color: white;
 	font-weight: 200;
-	text-shadow: 0 0 0.1em black;
+	text-shadow: 0 0 0.2em azure;
 }
 
 .link {
