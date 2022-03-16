@@ -12,7 +12,7 @@ export default function Loader() {
 	return (
 		<div className={styles.imageContainer}>
 			<div className={styles.title}>
-				<h3>Loading...</h3>
+				<span>Loading...</span>
 			</div>
 			<div className={styles.image}>
 				<img

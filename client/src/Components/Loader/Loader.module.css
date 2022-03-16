@@ -2,7 +2,7 @@
 	height: 100%;
 	width: 100%;
 	display: grid;
-	grid-template-rows: 10em 9fr 1fr 17em;
+	grid-template-rows: 8em 9fr 2fr 18em;
 	grid-template-columns: 1fr;
 }
 
@@ -11,6 +11,10 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-size: 1.7em;
+	color: white;
+	font-weight: 200;
+	text-shadow: 0 0 0.2em azure;
 }
 
 .image {
