@@ -6,6 +6,7 @@ import asset from '../../Assets/forms.module.css';
 
 export default function SearchBar() {
 	const [byName, setByName] = useState(true);
+	const [placeholder, setPlaceholder] = useState('Search...');
 
 	const dispatch = useDispatch();
 
@@ -17,7 +18,7 @@ export default function SearchBar() {
 	function handleOnSearch(e) {
 		e.preventDefault();
 		if (e.target[0].value === '') {
-			alert(`You are a fast clicker... write something first!`);
+			setPlaceholder('Write something first!');
 		} else {
 			byName
 				? dispatch(searchByName(e.target[0].value))
@@ -30,7 +31,7 @@ export default function SearchBar() {
 	return (
 		<form className={styles.searchBar} onSubmit={(e) => handleOnSearch(e)}>
 			<div className={styles.top}>
-				<input className={asset.input} placeholder='Search...' />
+				<input className={asset.input} placeholder={placeholder} />
 			</div>
 
 			<div className={styles.bottom}>

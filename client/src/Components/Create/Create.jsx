@@ -28,6 +28,9 @@ export default function Create() {
 		dispatch(getGenres());
 	}
 
+	const [showAlert, setShowAlert] = useState(false);
+	const [showSuccess, setShowSuccess] = useState(false);
+
 	const [newGame, setNewGame] = useState({
 		name: '',
 		description: '',
@@ -71,6 +74,16 @@ export default function Create() {
 		if (!genres.includes(e.target.value)) {
 			setGenres([...genres, e.target.value]);
 		}
+	}
+
+	function handleAlert(e) {
+		e.preventDefault();
+		setShowAlert(false);
+	}
+
+	function handleSuccess(e) {
+		e.preventDefault();
+		setShowSuccess(false);
 	}
 
 	useEffect(() => {
@@ -119,9 +132,9 @@ export default function Create() {
 			setGenres([]);
 			setShort_Screenshots([]);
 
-			alert('Congrats, game created!');
+			setShowSuccess(true);
 		} else {
-			alert('There are errors in the inputs');
+			setShowAlert(true);
 		}
 	}
 
@@ -363,6 +376,34 @@ export default function Create() {
 					</form>
 				</div>
 				<div className={styles.submit}>
+					{showSuccess && (
+						<div className={styles.alert}>
+							{'Success! Game created  '}
+							<button
+								style={{
+									minWidth: '2em',
+									margin: '0 1em',
+								}}
+								className={asset.button_select}
+								onClick={(e) => handleSuccess(e)}>
+								X
+							</button>
+						</div>
+					)}
+					{showAlert && (
+						<div className={styles.alert}>
+							{'There are errors in the inputs  '}
+							<button
+								style={{
+									minWidth: '2em',
+									margin: '0 1em',
+								}}
+								className={asset.button_select}
+								onClick={(e) => handleAlert(e)}>
+								X
+							</button>
+						</div>
+					)}
 					<button
 						className={asset.button}
 						onClick={(e) => handleSubmit(e)}>
