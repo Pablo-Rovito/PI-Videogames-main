@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Link } from 'react-router-dom';
+
 import styles from './Card.module.css';
 import asset from '../../Assets/forms.module.css';
 import img404 from '../../Assets/404.png';
@@ -11,7 +13,7 @@ export default function Card({ id, apiId, name, background_image, genres }) {
 		<div className={styles.card}>
 			<div className={asset.title}>
 				<Link to={`/detail/${apiId ? apiId : id}`}>
-					<h4>{decodeURIComponent(name)}</h4>
+					<h4>{decodeURIComponent(name).toUpperCase()}</h4>
 				</Link>
 			</div>
 

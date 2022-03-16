@@ -118,6 +118,7 @@ export default function Create() {
 			setPlatforms([]);
 			setGenres([]);
 			setShort_Screenshots([]);
+
 			alert('Congrats, game created!');
 		} else {
 			alert('There are errors in the inputs');

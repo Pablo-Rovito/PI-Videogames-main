@@ -1,23 +1,28 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styles from './Home.module.css';
 import asset from '../../Assets/forms.module.css';
 import Loader from '../Loader/Loader';
 import Page from '../Page/Page';
 import Pagination from '../Pagination/Pagination';
 import { ResultsPerPage } from '../Filters/Filters';
+import { clearDetail, getGames } from '../../Actions';
+
 import img404 from '../../Assets/404.png';
 
 export default function Home() {
+	const dispatch = useDispatch();
 	const allVideogames = useSelector((state) => state.videogames);
 
 	const [results, setResults] = useState(15);
 	const [currentPage, setCurrentPage] = useState(1);
 
 	useEffect(() => {
+		dispatch(clearDetail());
+		!allVideogames.length && dispatch(getGames());
 		setCurrentPage(1);
-	}, [results]);
+	}, [dispatch, results, allVideogames]);
 
 	function handleResults(e) {
 		e.preventDefault();

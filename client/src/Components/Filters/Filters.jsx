@@ -53,7 +53,9 @@ export function DropDown({ showAll, options, actionOnClick, placeholder }) {
 export function ResultsPerPage({ allVideogames, results, handleResults }) {
 	return (
 		<div className={styles.resultsSelector}>
-			<div>{`showing ${results} of ${allVideogames} results`}</div>
+			<div>{`showing ${
+				allVideogames < results ? allVideogames : results
+			} of ${allVideogames} results`}</div>
 			<div className={styles.buttons}>
 				<button
 					style={{ minWidth: '2em' }}

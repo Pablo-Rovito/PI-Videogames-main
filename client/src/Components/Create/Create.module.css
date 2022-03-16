@@ -20,6 +20,8 @@
 	align-self: flex-start;
 	align-items: center;
 	margin: 0.5em 1em;
+	font-weight: 200;
+	text-shadow: 0 0 0.1em black;
 }
 
 .name {
@@ -49,10 +51,14 @@
 
 .platform {
 	grid-row: 7;
+	font-weight: 200;
+	text-shadow: 0 0 0.1em black;
 }
 
 .screenshots {
 	grid-row: 8;
+	font-weight: 200;
+	text-shadow: 0 0 0.1em black;
 }
 
 .submit {

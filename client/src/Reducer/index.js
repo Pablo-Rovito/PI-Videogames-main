@@ -9,6 +9,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
 	switch (type) {
 		case 'CLEAR_GAMES':
 			return { ...state, videogames: [] };
+		case 'CLEAR_DETAIL':
+			return { ...state, videogame: {} };
 		case 'GET_GAMES':
 			state.allVideogames = payload;
 			return { ...state, videogames: payload };
@@ -85,7 +87,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
 		case 'SEARCH_BY_ID':
 			return { ...state, videogame: payload };
 		case 'ADD_GAME':
-			return { ...state, videogames: [payload] };
+			return { ...state };
 		default:
 			return { ...state };
 	}

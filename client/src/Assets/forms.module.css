@@ -1,6 +1,8 @@
 .button,
 .superButton,
 .button_select {
+	font-weight: 200;
+	text-shadow: 0 0 0.1em black;
 	border-radius: 0.1em;
 	padding: 0.1em 0.1em;
 	margin: 0.1em 0.1em;
@@ -22,6 +24,7 @@
 }
 
 .button_select {
+	text-shadow: 0 0 0.1em white;
 	border: solid 1px rgb(236 180 101 / 58%);
 	background-color: rgba(255, 255, 255, 0.034);
 	color: #ecb365;

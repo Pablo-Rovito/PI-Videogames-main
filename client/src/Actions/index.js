@@ -4,6 +4,10 @@ export function clearGames() {
 	return { type: 'CLEAR_GAMES' };
 }
 
+export function clearDetail() {
+	return { type: 'CLEAR_DETAIL' };
+}
+
 export function getGames() {
 	return async function (dispatch) {
 		try {
@@ -88,11 +92,8 @@ export function searchById(payload) {
 export function postToDb(payload) {
 	return async function (dispatch) {
 		try {
-			var results = await axios.post(
-				`http://localhost:3001/videogame/`,
-				payload
-			);
-			return dispatch({ type: 'ADD_GAME', payload: results.data });
+			await axios.post(`http://localhost:3001/videogame/`, payload);
+			return dispatch({ type: 'ADD_GAME' });
 		} catch (e) {
 			console.log(e);
 			return dispatch({ type: 'ADD_GAME', payload: 'Error' });

@@ -5,7 +5,7 @@ import { AiFillGithub, AiFillLinkedin, AiOutlineMail } from 'react-icons/ai';
 export default function About() {
 	return (
 		<div className={styles.container}>
-			<h2>About me...</h2>
+			<h2>ABOUT ME...</h2>
 			<div className={styles.intro}>
 				<span>
 					{
@@ -54,7 +54,7 @@ export default function About() {
 				</div>
 			</div>
 			<div className={styles.contact}>
-				<h3>Contact</h3>
+				<h3>CONTACT</h3>
 				<div className={styles.link}>
 					<AiFillGithub style={{ fontSize: '1.5em' }} />
 					<a

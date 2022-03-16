@@ -23,7 +23,7 @@ export default function Detail({ match }) {
 		}
 		return (g.apiId ? g.apiId : g.id) === parseInt(match.params.id);
 	});
-	
+
 	const short_screenshots = gameFromList?.short_screenshots
 		? gameFromList.short_screenshots
 		: [];
