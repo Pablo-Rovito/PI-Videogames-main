@@ -42,7 +42,9 @@ export default function Nav() {
 			</div>
 			<div className={styles.logOut}>
 				<NavLink to='/'>
-					<IoPower />
+					<div>
+						<IoPower className={styles.logOutLogo} />
+					</div>
 				</NavLink>
 			</div>
 		</div>

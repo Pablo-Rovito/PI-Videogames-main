@@ -5,7 +5,7 @@ import { AiFillGithub, AiFillLinkedin, AiOutlineMail } from 'react-icons/ai';
 export default function About() {
 	return (
 		<div className={styles.container}>
-			<h2>ABOUT ME...</h2>
+			<h2>ABOUT ME</h2>
 			<div className={styles.intro}>
 				<span>
 					{

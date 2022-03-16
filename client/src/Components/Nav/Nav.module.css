@@ -44,6 +44,11 @@
 	text-decoration: none;
 }
 
+.activeTitle,
+.title {
+	transition: all ease-in-out 0.2s;
+}
+
 .title::before {
 	content: '';
 	position: absolute;
@@ -60,4 +65,13 @@
 
 .title:hover::before {
 	transform: scaleX(1);
+}
+.logOutLogo {
+	border: solid 1px transparent;
+	border-radius: 50%;
+	transition: all ease-in-out 0.2s;
+}
+.logOutLogo:hover {
+	color: white;
+	box-shadow: 0 0 0.1em 0.02em white;
 }

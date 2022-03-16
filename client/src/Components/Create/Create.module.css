@@ -93,5 +93,6 @@
 .displayCreators {
 	grid-row: 2;
 	max-height: 100%;
+	max-width: 100%;
 	overflow: scroll;
 }

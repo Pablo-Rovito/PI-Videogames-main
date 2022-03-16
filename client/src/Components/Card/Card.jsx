@@ -10,7 +10,9 @@ export default function Card({ id, apiId, name, background_image, genres }) {
 	const displayImage = background_image ? background_image : img404;
 
 	return (
-		<div className={styles.card}>
+		<div
+			className={styles.card}
+			style={{ backgroundImage: { displayImage } }}>
 			<div className={asset.title}>
 				<Link to={`/detail/${apiId ? apiId : id}`}>
 					<h4>{decodeURIComponent(name).toUpperCase()}</h4>
