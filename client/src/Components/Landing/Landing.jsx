@@ -1,9 +1,14 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
+import { clearGames } from '../../Actions';
+import { useDispatch } from 'react-redux';
 import asset from '../../Assets/forms.module.css';
 import styles from './Landing.module.css';
 
 export default function Landing(params) {
+	const dispatch = useDispatch();
+
+	useEffect(() => dispatch(clearGames()), [dispatch]);
+
 	function navigateOnClick(e) {
 		e.preventDefault();
 		params.history.push('/home');
