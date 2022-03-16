@@ -36,6 +36,10 @@ export function filterByGenres(payload) {
 	return { type: 'FILTER_BY_GENRES', payload };
 }
 
+export function switchAssociativity(){
+	return {type: "SWITCH_GENRE_FILTERING"}
+}
+
 export function setOrder(payload) {
 	return { type: 'SET_ORDER', payload };
 }

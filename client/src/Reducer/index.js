@@ -3,6 +3,7 @@ const initialState = {
 	videogame: {},
 	genres: [],
 	allVideogames: [],
+	nonAssociative: false,
 };
 
 const rootReducer = (state = initialState, { type, payload }) => {
@@ -16,8 +17,10 @@ const rootReducer = (state = initialState, { type, payload }) => {
 			return { ...state, videogames: payload };
 		case 'GET_GENRES':
 			return { ...state, genres: payload };
+		case 'SWITCH_GENRE_FILTERING':
+			return { ...state, nonAssociative: !state.nonAssociative };
 		case 'FILTER_BY_GENRES':
-			state.videogames = state.allVideogames;
+			state.nonAssociative && (state.videogames = state.allVideogames);
 			var filteredByGenre = [];
 			if (payload === 'All') {
 				return { ...state };
