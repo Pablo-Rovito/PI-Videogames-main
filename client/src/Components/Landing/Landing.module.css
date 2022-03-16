@@ -1,0 +1,28 @@
+.main {
+	display: grid;
+	grid-template-rows: 25% 15% 15% 45%;
+	min-height: 100%;
+}
+
+.title,
+.button {
+	grid-column: 2;
+	grid-row: 2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.title {
+	grid-column: 2;
+	grid-row: 2;
+	color: rgb(0, 0, 0);
+	font-size: 2em;
+	font-weight: 200;
+	text-shadow: 0 0 0.2em black;
+}
+
+.button {
+	grid-column: 2;
+	grid-row: 3;
+}

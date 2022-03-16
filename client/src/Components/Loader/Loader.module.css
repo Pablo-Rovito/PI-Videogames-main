@@ -1,0 +1,21 @@
+.imageContainer {
+	height: 100%;
+	width: 100%;
+	display: grid;
+	grid-template-rows: 10em 9fr 1fr 17em;
+	grid-template-columns: 1fr;
+}
+
+.title {
+	grid-row: 3;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.image {
+	grid-row: 2;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

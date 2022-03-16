@@ -1,0 +1,25 @@
+.sidePanel {
+	height: 100%;
+	display: grid;
+	grid-template-rows: 1fr 1fr 1fr;
+}
+
+.search {
+	grid-row: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.filters {
+	grid-row: 2;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.reset {
+	grid-row: 3;
+}

@@ -1,0 +1,6 @@
+.general {
+	display: flex;
+	flex-wrap: wrap;
+	overflow: scroll;
+	max-height: 6em;
+}

@@ -1,0 +1,55 @@
+.card {
+	margin: 2em 0;
+	width: 17vw;
+	height: 48vh;
+	display: grid;
+	grid-template-rows: 1fr 20fr 4fr;
+	justify-content: center;
+	align-items: center;
+	justify-items: center;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.8);
+	border-radius: 0.2em;
+	box-shadow: 0 0 0 0 #ecb46515;
+	animation-name: glow;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+}
+
+.title {
+	grid-row: 1;
+	padding: 0 0.5em;
+	display: flex;
+
+	flex-wrap: wrap;
+
+}
+
+.image {
+	grid-row: 2;
+	overflow: hidden;
+	max-height: 100%;
+}
+
+.genres {
+	grid-row: 3;
+	font-weight: 200;
+	color: #ecb365;
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 1em;
+}
+
+@keyframes glow {
+	from {
+		box-shadow: 0 0 0 0 #ffffff7e;
+	}
+
+	50% {
+		box-shadow: 0 0 1em 0.02em #ffffff7e;
+	}
+
+	to {
+		box-shadow: 0 0 0 0 #ffffff7e;
+	}
+}

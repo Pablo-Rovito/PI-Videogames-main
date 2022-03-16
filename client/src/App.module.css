@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100;200;300;400;500;600&display=swap');
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+.app {
+	font-family: 'Work Sans', sans-serif;
+	text-align: center;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden;
+	background: linear-gradient(to bottom right, #0a4c66, #02101d);
+	color: azure;
+	display: grid;
+	grid-template-columns: 1fr 65vw 1fr;
+	grid-template-rows: 1fr 7fr;
+}
+
+.background {
+	grid-column: 2;
+	grid-row: 1/3;
+	background-image: url('./Assets/background.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: top;
+}
+
+.sidePanel {
+	grid-column: 1;
+	grid-row: 2;
+	justify-content: center;
+	align-items: center;
+}
+
+.nav {
+	grid-column: 1/4;
+	grid-row: 1;
+}
+
+.site {
+	grid-column: 2;
+	grid-row: 2;
+	justify-content: center;
+	align-content: center;
+	overflow: scroll;
+	display: flex;
+}
+
+a {
+	text-decoration: inherit;
+	color: inherit;
+}

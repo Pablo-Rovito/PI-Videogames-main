@@ -1,0 +1,10 @@
+.cardsContainer {
+	align-items: center;
+	justify-items: center;
+	width: 60vw;
+	height: 100%;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-template-rows: auto;
+	overflow: scroll;
+}
