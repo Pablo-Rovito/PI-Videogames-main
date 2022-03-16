@@ -30,7 +30,9 @@ const rootReducer = (state = initialState, { type, payload }) => {
 						filteredByGenre.push(game);
 				});
 			});
-			return { ...state, videogames: filteredByGenre };
+			return filteredByGenre.length === 0
+				? { ...state, videogames: 'Error' }
+				: { ...state, videogames: filteredByGenre };
 		case 'FILTER_BY_CREATOR':
 			state.videogames = state.allVideogames;
 			var filteredByCreator = [];
@@ -42,7 +44,7 @@ const rootReducer = (state = initialState, { type, payload }) => {
 					(game) => game.created === true
 				);
 				return filteredByCreator.length === 0
-					? { ...state, videogames: [{ status: 404 }] }
+					? { ...state, videogames: 'Error' }
 					: { ...state, videogames: filteredByCreator };
 			}
 			filteredByCreator = state.allVideogames.filter(
@@ -84,7 +86,8 @@ const rootReducer = (state = initialState, { type, payload }) => {
 				}),
 			};
 		case 'SEARCH_BY_NAME':
-			return { ...state, allVideogames: payload, videogames: payload };
+			state.allVideogames = payload;
+			return { ...state, videogames: payload };
 		case 'SEARCH_BY_ID':
 			return { ...state, videogame: payload };
 		case 'ADD_GAME':
