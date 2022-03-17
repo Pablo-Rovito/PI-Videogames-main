@@ -4,6 +4,7 @@ const { Router } = require('express');
 const videogames = require('./videogames.js');
 const videogame = require('./videogame.js');
 const genres = require('./genres.js');
+
 const router = Router();
 
 // Configurar los routers
