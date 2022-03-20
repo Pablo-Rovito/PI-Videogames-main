@@ -37,13 +37,20 @@ export default function SidePanel() {
 				<SearchBar />
 			</div>
 			<div className={styles.filters}>
+				<button
+					onClick={(e) => {
+						handleReset(e);
+					}}
+					className={asset.dropdown_button}>
+					Reset games
+				</button>
 				<DropDown
 					showAll={false}
 					options={[
 						{ name: 'A-Z' },
 						{ name: 'Z-A' },
-						{ name: '0-5' },
-						{ name: '5-0' },
+						{ name: 'Rating 0-5' },
+						{ name: 'Rating 5-0' },
 					]}
 					actionOnClick={setOrder}
 					placeholder={'Set order'}
@@ -54,12 +61,6 @@ export default function SidePanel() {
 					actionOnClick={filterByCreator}
 					placeholder={'Filter by source'}
 				/>
-				<DropDown
-					showAll={true}
-					options={allGenres}
-					actionOnClick={filterByGenres}
-					placeholder={'Filter by genre'}
-				/>
 				<button
 					onClick={(e) => {
 						handleAssociativity(e);
@@ -69,13 +70,13 @@ export default function SidePanel() {
 						? 'Single genre filtering'
 						: 'Multi genre filtering'}
 				</button>
-				<button
-					onClick={(e) => {
-						handleReset(e);
-					}}
-					className={asset.dropdown_button}>
-					Reset games
-				</button>
+				<DropDown
+					showAll={true}
+					options={allGenres}
+					actionOnClick={filterByGenres}
+					placeholder={'Filter by genre'}
+					display={true}
+				/>
 			</div>
 			<div className={styles.reset}></div>
 		</div>

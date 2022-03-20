@@ -18,8 +18,8 @@ router.get(`/`, async function (req, res) {
 router.get(`/promise`, function (req, res) {
 	axios
 		.get(`https://api.rawg.io/api/genres?key=${API_KEY}`)
-		.then((response) => {
-			const genres = response.data.results.map(({ id, name }) => {
+		.then(({ data }) => {
+			const genres = data.results.map(({ id, name }) => {
 				return {
 					id,
 					name,

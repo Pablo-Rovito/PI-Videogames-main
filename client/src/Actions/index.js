@@ -11,7 +11,7 @@ export function clearDetail() {
 export function getGames() {
 	return async function (dispatch) {
 		try {
-			var games = await axios.get('http://localhost:3001/videogames');
+			var games = await axios.get('/videogames');
 			return dispatch({ type: 'GET_GAMES', payload: games.data });
 		} catch (e) {
 			console.log(e);
@@ -20,10 +20,24 @@ export function getGames() {
 	};
 }
 
+export function getGamesPromise() {
+	return function (dispatch) {
+		axios
+			.get('/videogames')
+			.then((games) => {
+				return dispatch({ type: 'GET_GAMES', payload: games.data });
+			})
+			.catch((error) => {
+				console.log(error);
+				return dispatch({ type: 'GET_GAMES', payload: 'Error' });
+			});
+	};
+}
+
 export function getGenres() {
 	return async function (dispatch) {
 		try {
-			var genres = await axios.get('http://localhost:3001/genres');
+			var genres = await axios.get('/genres');
 			return dispatch({ type: 'GET_GENRES', payload: genres.data });
 		} catch (e) {
 			console.log(e);
@@ -36,20 +50,12 @@ export function filterByGenres(payload) {
 	return { type: 'FILTER_BY_GENRES', payload };
 }
 
-export function switchAssociativity(){
-	return {type: "SWITCH_GENRE_FILTERING"}
+export function switchAssociativity() {
+	return { type: 'SWITCH_GENRE_FILTERING' };
 }
 
 export function setOrder(payload) {
 	return { type: 'SET_ORDER', payload };
-}
-
-export function setOrderName(payload) {
-	return { type: 'SET_ORDER_NAME', payload };
-}
-
-export function setOrderRating(payload) {
-	return { type: 'SET_ORDER_RATING', payload };
 }
 
 export function filterByCreator(payload) {
@@ -60,7 +66,7 @@ export function searchByName(payload) {
 	return async function (dispatch) {
 		try {
 			var results = await axios.get(
-				`http://localhost:3001/videogames/?name=${payload}`
+				`/videogames/?name=${payload}`
 			);
 			var sanitizedResults = [];
 			results.data.forEach((r) => {
@@ -82,7 +88,7 @@ export function searchById(payload) {
 	return async function (dispatch) {
 		try {
 			var results = await axios.get(
-				`http://localhost:3001/videogame/${payload}`
+				`/videogame/${payload}`
 			);
 			return dispatch({ type: 'SEARCH_BY_ID', payload: results.data });
 		} catch (e) {
@@ -95,7 +101,7 @@ export function searchById(payload) {
 export function postToDb(payload) {
 	return async function (dispatch) {
 		try {
-			await axios.post(`http://localhost:3001/videogame/`, payload);
+			await axios.post(`/videogame/`, payload);
 			return dispatch({ type: 'ADD_GAME' });
 		} catch (e) {
 			console.log(e);

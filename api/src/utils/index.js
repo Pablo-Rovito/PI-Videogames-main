@@ -1,8 +1,25 @@
 require('dotenv').config();
 const { API_KEY } = process.env;
 const axios = require('axios');
-const { Op } = require('sequelize');
+const { Op, Sequelize } = require('sequelize');
 var { Videogame, Genre } = require('../db.js');
+
+async function idGen() {
+	const gamesFromDb = await Videogame.findAll({ attributes: ['id'] });
+	var id = 'db0';
+	if (gamesFromDb.length) {
+		const ids = gamesFromDb.map((g) => {
+			return g.dataValues.id;
+		});
+		const intIds = ids?.map((id) => {
+			return parseInt(id.slice(2));
+		});
+		const max = Math.max(...intIds);
+		id = 'db' + (max + 1);
+	}
+
+	return id;
+}
 
 module.exports = {
 	getGenresFromApi: async function () {
@@ -176,7 +193,6 @@ module.exports = {
 					through: { attributes: [] },
 				},
 			});
-			console.log(games);
 
 			return games[0];
 		} catch (e) {
@@ -195,8 +211,11 @@ module.exports = {
 			short_screenshots,
 		} = data;
 
+		let id = await idGen();
+
 		try {
 			const newGame = await Videogame.create({
+				id: id,
 				name,
 				description,
 				rating,
@@ -212,9 +231,9 @@ module.exports = {
 
 			await newGame.addGenre(gDB);
 
-			return res.json({ msg: 'Game created' });
+			return { msg: 'Game created' };
 		} catch (e) {
-			return res.json(e);
+			return e;
 		}
 	},
 };

@@ -24,17 +24,17 @@ const rootReducer = (state = initialState, { type, payload }) => {
 			if (payload === 'All') {
 				return { ...state };
 			}
-			state.videogames.forEach((game) => {
-				game.genres.forEach((genre) => {
+			state?.videogames?.forEach((game) => {
+				game?.genres?.forEach((genre) => {
 					if (Object.values(genre).includes(payload))
 						filteredByGenre.push(game);
 				});
 			});
-			return filteredByGenre.length === 0
+			return filteredByGenre?.length === 0
 				? { ...state, videogames: 'Error' }
 				: { ...state, videogames: filteredByGenre };
 		case 'FILTER_BY_CREATOR':
-			state.videogames = state.allVideogames;
+			state.videogames = state?.allVideogames;
 			var filteredByCreator = [];
 			if (payload === 'All') {
 				return { ...state };
@@ -68,13 +68,13 @@ const rootReducer = (state = initialState, { type, payload }) => {
 								: a.name < b.name
 								? 1
 								: 0;
-						case '0-5':
+						case 'Rating 0-5':
 							return a.rating > b.rating
 								? 1
 								: a.rating < b.rating
 								? -1
 								: 0;
-						case '5-0':
+						case 'Rating 5-0':
 							return a.rating > b.rating
 								? -1
 								: a.rating < b.rating
