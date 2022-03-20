@@ -1,20 +1,52 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import asset from '../../Assets/forms.module.css';
 import styles from './Filters.module.css';
 
-export function DropDown({ showAll, options, actionOnClick, placeholder }) {
+import { clearGames, getGames } from '../../Actions';
+
+export function DropDown({
+	showAll,
+	options,
+	actionOnClick,
+	placeholder,
+	display,
+}) {
 	const dispatch = useDispatch();
+
+	const [genres, setGenres] = useState([]);
+
+	const games = useSelector((state) => state.videogames);
+	const nonAssociative = useSelector((state) => state.nonAssociative);
+
+	useEffect(() => {
+		setGenres([]);
+	}, [nonAssociative]);
 
 	function handleDispatch(e) {
 		e.preventDefault();
-		dispatch(actionOnClick(e.target.value));
+		if (e.target.value === 'All') {
+			dispatch(clearGames());
+			dispatch(getGames());
+			return setGenres([]);
+		}
+
+		if (Array.isArray(games) && games.length !== 0) {
+			!nonAssociative &&
+				!genres?.includes(e.target.value) &&
+				setGenres([...genres, e.target.value]);
+			dispatch(actionOnClick(e.target.value));
+		} else {
+			setGenres([]);
+			dispatch(clearGames());
+			dispatch(getGames());
+		}
 	}
 
 	return (
 		<div className={styles.dropdown}>
-			<div>
+			<div className={styles.body}>
 				<div className={asset.dropdown}>
 					<button
 						className={asset.dropdown_button}
@@ -23,7 +55,6 @@ export function DropDown({ showAll, options, actionOnClick, placeholder }) {
 						}}>
 						{placeholder}
 					</button>
-
 					<div className={asset.dropdown_content}>
 						{showAll && (
 							<button
@@ -45,6 +76,18 @@ export function DropDown({ showAll, options, actionOnClick, placeholder }) {
 						})}
 					</div>
 				</div>
+			</div>
+			
+			<div className={styles.display}>
+				{display &&
+					!nonAssociative &&
+					genres
+						.filter((g) => {
+							return g !== 'All';
+						})
+						.map((g, i) => {
+							return i === 0 ? ` ${g} ` : `| ${g} `;
+						})}
 			</div>
 		</div>
 	);

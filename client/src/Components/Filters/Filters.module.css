@@ -1,17 +1,3 @@
-.select {
-	display: grid;
-	grid-template-columns: auto;
-}
-
-.filters {
-	display: flex;
-	justify-content: center;
-	align-content: center;
-}
-.filter:focus {
-	outline: none;
-}
-
 .resultsSelector {
 	display: flex;
 	align-items: center;
@@ -24,10 +10,20 @@
 }
 
 .dropdown {
-	display: grid;
-	grid-template-rows: 3;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
 }
 
-.sortSelector {
+.body {
 	display: flex;
+}
+
+.display {
+	font-weight: 200;
+	color: #ecb365;
+	text-shadow: 0 0 0.2em azure;
+	display: flex;
+	flex-wrap: wrap;
 }

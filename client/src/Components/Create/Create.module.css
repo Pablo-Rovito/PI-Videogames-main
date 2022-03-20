@@ -1,7 +1,7 @@
 .form_container {
 	margin: 2em 0 0 2em;
 	display: grid;
-	grid-template-rows: 3em 3em 3em 3em 3em 9em 9em 9em 3em;
+	grid-template-rows: 3em 3em 3em 3em 3em 9em 9em 9em 9em;
 	justify-items: start;
 }
 
@@ -71,7 +71,6 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 5em;
 }
 
 .alert {

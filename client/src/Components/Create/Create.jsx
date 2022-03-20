@@ -23,7 +23,7 @@ export default function Create() {
 	);
 
 	const dispatch = useDispatch();
-	
+
 	const allGenres = useSelector((state) => state.genres);
 	if (allGenres.length === 0) {
 		dispatch(getGenres());
@@ -112,7 +112,7 @@ export default function Create() {
 		let { n, d, rat, b, rel, p, g } = validate;
 		if (n && d && rat && b && rel && p && g) {
 			setNewGame((newGame.rating = parseFloat(newGame.rating)));
-
+			console.log(genres);
 			dispatch(
 				postToDb({
 					...newGame,
