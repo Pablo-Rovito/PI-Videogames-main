@@ -23,7 +23,7 @@ export default function SearchBar() {
 			byName
 				? dispatch(searchByName(e.target[0].value))
 				: window.location.assign(
-						`http://localhost:3000/detail/${e.target[0].value}`
+						`${process.env.REACT_APP_API}/detail/${e.target[0].value}`
 				  );
 		}
 	}
