@@ -20,10 +20,12 @@ export default function SearchBar() {
 		if (e.target[0].value === '') {
 			setPlaceholder('Write something first!');
 		} else {
+			let dir = window.location.href.split('/');
+			let reDirBase = dir[0] + '//' + dir[1] + '/' + dir[2];
 			byName
 				? dispatch(searchByName(e.target[0].value))
 				: window.location.assign(
-						`${process.env.REACT_APP}/detail/${e.target[0].value}`
+						`${reDirBase}/detail/${e.target[0].value}`
 				  );
 		}
 	}
